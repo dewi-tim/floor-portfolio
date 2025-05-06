@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>La Pâtisserie Élégante</title>
+    <link rel="stylesheet" href="css/styles.css?v=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital@0;1&family=Great+Vibes&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Floor's Portfolio</h1>
+            <p class="subtitle">select an item to see more</p>
+        </header>
+        
+        <main>
+            <div class="menu-grid" id="menu-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </main>
+        
+        <footer>
+            <div class="contact-links">
+                <a href="mailto:floor@example.com" class="footer-link">floor@example.com</a>
+                <span class="link-divider">•</span>
+                <a href="https://instagram.com/floor" target="_blank" rel="noopener noreferrer" class="footer-link">@floor</a>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div class="modal-body">
+                <div class="modal-image-container">
+                    <img id="modal-image" src="" alt="">
+                </div>
+                <div class="modal-text-container">
+                    <p id="modal-description"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
