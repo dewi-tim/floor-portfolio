@@ -1,32 +1,29 @@
 #!/bin/bash
-# Script to optimize images for web performance
+# Script to optimize images for web performance with different strategies
 
 # Create optimized directories if they don't exist
-mkdir -p img/optimized/png
 mkdir -p img/optimized/jpg
+mkdir -p img/optimized/png
 
-# Optimize main images (PNG)
-for img in img/pastry*.png; do
+# ========= Main pastry images =========
+echo "===== Processing main pastry images ====="
+# For main images (pastry1.png through pastry8.png) - subtle downsample to JPG
+for img in img/pastry[1-8].png; do
   filename=$(basename "$img")
-  echo "Optimizing PNG: $filename..."
-  convert "$img" -strip -resize 800x800\> -quality 85 "img/optimized/png/$filename"
-  
-  # Create JPG version (without .png extension)
-  jpgname="${filename%.png}.jpg"
-  echo "Creating JPG: $jpgname..."
-  convert "$img" -strip -resize 800x800\> -quality 85 -background white -flatten "img/optimized/jpg/$jpgname"
+  echo "Creating JPG version of $filename..."
+  # Subtle downsample to JPG - maintain good quality (90)
+  convert "$img" -strip -resize 800x800\> -quality 90 -background white -flatten "img/optimized/jpg/${filename%.png}.jpg"
 done
 
-# Optimize thumbnails (PNG)
+# ========= Square thumbnail images =========
+echo "===== Processing square thumbnails ====="
+# For square thumbnails - we'll use high compression PNG to maintain transparency
 for img in img/square/pastry*-square.png; do
   filename=$(basename "$img")
-  echo "Optimizing thumbnail PNG: $filename..."
-  convert "$img" -strip -resize 300x300\> -quality 85 "img/optimized/png/$filename"
-  
-  # Create JPG version (without .png extension)
-  jpgname="${filename%.png}.jpg"
-  echo "Creating thumbnail JPG: $jpgname..."
-  convert "$img" -strip -resize 300x300\> -quality 85 -background white -flatten "img/optimized/jpg/$jpgname"
+  echo "Optimizing square thumbnail $filename..."
+  # Smaller downsample with high PNG compression (9)
+  convert "$img" -strip -resize 250x250\> -quality 90 -define png:compression-level=9 "img/optimized/png/$filename"
 done
 
+# ========= Other images remain unchanged =========
 echo "Optimization complete!"
