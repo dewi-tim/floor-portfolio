@@ -51,6 +51,15 @@ body {
     box-sizing: border-box;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1; /* Lower than header */
+    margin-top: 1.5rem; /* Space between header and grid */
+    flex: 1;
+}
+
 /* Header styles */
 header {
     text-align: center;
@@ -58,6 +67,7 @@ header {
     border-bottom: 1px solid var(--border-color);
     position: relative;
     overflow: hidden;
+    z-index: 5; /* Ensure header is above grid content */
 }
 
 header::before {
@@ -85,6 +95,7 @@ h1 {
     color: #000;
     padding: 0.2rem 2rem;
     display: inline-block;
+    z-index: 10; /* Ensure title is above everything */
 }
 
 /* Decorative elements for the title */
@@ -118,6 +129,7 @@ h1::after {
     position: relative;
     display: inline-block;
     padding: 0 1rem;
+    z-index: 10; /* Ensure subtitle is above everything */
 }
 
 .subtitle::before, .subtitle::after {
@@ -454,9 +466,7 @@ footer {
     }
     
     main {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+        margin-top: 0.75rem; /* Smaller margin on mobile */
     }
     
     .menu-item {
