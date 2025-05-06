@@ -3,64 +3,64 @@
     {
       "id": 1,
       "title": "Meringue Citron",
-      "thumbnail": "img/square/pastry1-square.png?v=5",
-      "image": "img/pastry1.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry1-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry1.jpg?v=1",
       "shortDescription": "Delicate swirled meringue with lemon curd",
       "fullDescription": "Our signature lemon meringue features a hand-piped swirl of crisp meringue atop a vibrant lemon curd base. The meringue is torched to perfection, creating a golden exterior while maintaining a soft, marshmallow-like interior. The balance of sweet meringue and tangy lemon creates a perfect harmony of flavors."
     },
     {
       "id": 2,
       "title": "Dôme d'Agrumes",
-      "thumbnail": "img/square/pastry2-square.png?v=5",
-      "image": "img/pastry2.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry2-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry2.jpg?v=1",
       "shortDescription": "Geometric amber dome with edible flowers",
       "fullDescription": "This stunning amber-hued dome showcases our mastery of modern patisserie techniques. The faceted exterior reveals a honey-citrus gelée encasing delicate edible flowers. Perfect for special occasions, this jewel-like creation pairs beautifully with our afternoon tea service."
     },
     {
       "id": 3,
       "title": "Entremets Pomme Verte",
-      "thumbnail": "img/square/pastry3-square.png?v=5",
-      "image": "img/pastry3.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry3-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry3.jpg?v=1",
       "shortDescription": "Glossy green apple entremet with chocolate leaves",
       "fullDescription": "Our apple entremet features a mirror-glazed exterior in vibrant green, mimicking the glossy skin of a fresh apple. The sculptural chocolate leaves add an artistic touch to this modern creation. Inside, layers of apple mousse, cinnamon biscuit, and caramel create a symphony of autumn flavors."
     },
     {
       "id": 4,
       "title": "Croissant Framboise",
-      "thumbnail": "img/square/pastry4-square.png?v=5",
-      "image": "img/pastry4.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry4-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry4.jpg?v=1",
       "shortDescription": "Red-tinted butter croissant with berry essence",
       "fullDescription": "This striking raspberry-tinted croissant is our signature morning pastry. The dough is laminated with butter infused with freeze-dried raspberries, creating not only its distinctive color but also subtle berry notes throughout the 27 layers. The exterior shatters beautifully while the interior remains soft and airy."
     },
     {
       "id": 5,
       "title": "Éclair au Chocolat",
-      "thumbnail": "img/square/pastry5-square.png?v=5",
-      "image": "img/pastry5.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry5-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry5.jpg?v=1",
       "shortDescription": "Classic chocolate éclair with glossy ganache",
       "fullDescription": "Our chocolate éclair stays true to tradition while achieving perfection in every detail. The choux pastry is baked to achieve a crisp exterior and hollow center, then filled with rich chocolate crème pâtissière. The top is glazed with a mirror-like chocolate ganache and adorned with a delicate gold leaf."
     },
     {
       "id": 6,
       "title": "Cube Noir",
-      "thumbnail": "img/square/pastry6-square.png?v=5",
-      "image": "img/pastry6.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry6-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry6.jpg?v=1",
       "shortDescription": "Minimalist black cube with geometric precision",
       "fullDescription": "Our signature architectural dessert presents a perfect black cube of extraordinary precision. The velvet-smooth exterior encases layers of dark chocolate mousse, coffee cremeux, and a crunchy praline base. This striking modern creation exemplifies our philosophy of combining artistic expression with exceptional flavor."
     },
     {
       "id": 7,
       "title": "Tour de Macarons",
-      "thumbnail": "img/square/pastry7-square.png?v=5",
-      "image": "img/pastry7.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry7-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry7.jpg?v=1",
       "shortDescription": "Layered macaron tower with pistachio and rose",
       "fullDescription": "This elegant tower showcases our perfectly crafted macarons in graduated sizes. Each shell features our signature ruffled foot and smooth dome. The delicate pink shells encase a pistachio ganache, garnished with rose petals and pistachios. Equally suited for an afternoon treat or a celebration centerpiece."
     },
     {
       "id": 8,
       "title": "Tarte Rustique aux Pommes",
-      "thumbnail": "img/square/pastry8-square.png?v=5",
-      "image": "img/pastry8.png?v=1",
+      "thumbnail": "img/optimized/jpg/pastry8-square.jpg?v=1",
+      "image": "img/optimized/jpg/pastry8.jpg?v=1",
       "shortDescription": "Rustic apple tart with caramelized edges",
       "fullDescription": "Our rustic apple tart celebrates the simple beauty of seasonal fruit. Thinly sliced apples are arranged in a spiral pattern over buttery pastry with folded edges. During baking, the fruit caramelizes and the pastry achieves a perfect golden hue. Finished with a light brush of our house-made apple caramel."
     }
