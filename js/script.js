@@ -95,6 +95,8 @@ function openModal(itemId) {
                 const modalImage = document.getElementById('modal-image');
                 modalImage.src = item.image + '?v=' + new Date().getTime();
                 modalImage.alt = item.title;
+                // Ensure image has the right width styling
+                modalImage.style.width = '100%';
                 
                 // Set description
                 document.getElementById('modal-description').textContent = item.fullDescription;
