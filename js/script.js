@@ -14,50 +14,38 @@ function renderMenuItems(items) {
     menuGrid.innerHTML = ''; // Clear grid first
     const timestamp = new Date().getTime();
     
-    // Create table structure
-    for (let row = 0; row < 4; row++) {
-        const rowElement = document.createElement('div');
-        rowElement.className = 'menu-row';
+    // Create items directly in the grid
+    items.forEach(item => {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'menu-item';
+        menuItem.dataset.id = item.id;
         
-        // Add 2 items to each row
-        for (let col = 0; col < 2; col++) {
-            const itemIndex = row * 2 + col;
-            if (itemIndex < items.length) {
-                const item = items[itemIndex];
-                const menuItem = document.createElement('div');
-                menuItem.className = 'menu-item';
-                menuItem.dataset.id = item.id;
-                
-                // Create elements for each part
-                const title = document.createElement('h3');
-                title.className = 'item-title';
-                title.textContent = item.title;
-                
-                const thumbnailContainer = document.createElement('div');
-                thumbnailContainer.className = 'thumbnail-container';
-                
-                const thumbnail = document.createElement('img');
-                thumbnail.className = 'thumbnail';
-                thumbnail.src = `${item.thumbnail}?v=${timestamp}`;
-                thumbnail.alt = item.title;
-                thumbnail.loading = 'lazy';
-                
-                const description = document.createElement('p');
-                description.className = 'item-description';
-                description.textContent = item.shortDescription;
-                
-                // Assemble the menu item
-                thumbnailContainer.appendChild(thumbnail);
-                menuItem.appendChild(title);
-                menuItem.appendChild(thumbnailContainer);
-                menuItem.appendChild(description);
-                
-                rowElement.appendChild(menuItem);
-            }
-        }
+        // Create elements for each part
+        const title = document.createElement('h3');
+        title.className = 'item-title';
+        title.textContent = item.title;
         
-        menuGrid.appendChild(rowElement);
-    }
+        const thumbnailContainer = document.createElement('div');
+        thumbnailContainer.className = 'thumbnail-container';
+        
+        const thumbnail = document.createElement('img');
+        thumbnail.className = 'thumbnail';
+        thumbnail.src = `${item.thumbnail}?v=${timestamp}`;
+        thumbnail.alt = item.title;
+        thumbnail.loading = 'lazy';
+        
+        const description = document.createElement('p');
+        description.className = 'item-description';
+        description.textContent = item.shortDescription;
+        
+        // Assemble the menu item
+        thumbnailContainer.appendChild(thumbnail);
+        menuItem.appendChild(title);
+        menuItem.appendChild(thumbnailContainer);
+        menuItem.appendChild(description);
+        
+        menuGrid.appendChild(menuItem);
+    });
 }
 
 function setupEventListeners() {
