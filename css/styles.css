@@ -292,6 +292,8 @@ h1::before, h1::after {
     cursor: pointer;
     z-index: 10;
     color: #333;
+    /* Make close button more tappable on mobile */
+    padding: 5px 10px;
 }
 
 #modal-title {
@@ -492,6 +494,12 @@ footer {
         width: 95%;
         padding: 1rem;
         max-height: 80vh;
+    }
+    
+    .close-button {
+        padding: 8px 12px; /* Larger tap target on mobile */
+        top: 0.2rem;
+        right: 0.6rem;
     }
     
     #modal-image {

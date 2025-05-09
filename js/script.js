@@ -66,8 +66,15 @@ function setupEventListeners() {
     // Setup close button for modal
     closeButton.addEventListener('click', closeModal);
     
-    // Close modal when clicking outside of modal content
+    // Close modal when clicking/tapping outside of modal content
     window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Add touchend event for mobile devices
+    window.addEventListener('touchend', function(event) {
         if (event.target === modal) {
             closeModal();
         }
