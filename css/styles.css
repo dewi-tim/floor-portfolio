@@ -633,8 +633,9 @@ footer {
     }
     
     .contact-links {
-        flex-direction: column;
-        gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem 1rem;
     }
     
     .link-divider {
