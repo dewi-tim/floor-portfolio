@@ -548,6 +548,11 @@ footer {
         --cell-padding: 0.3rem;
     }
     
+    header {
+        padding: 1rem 0 0rem;
+        margin-bottom: 0.2rem;
+    }
+    
     .subtitle {
         font-size: 0.63rem; /* Even smaller font on very small screens */
         max-width: 95%; /* Allow more width */
