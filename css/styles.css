@@ -234,7 +234,7 @@ h1::before, h1::after {
     font-style: normal;
     margin: 0.4rem auto 0;
     line-height: 1.4;
-    color: #333;
+    color: #222; /* Darker text for better readability */
     width: 80%;
     white-space: normal;
     word-wrap: break-word;
@@ -270,13 +270,13 @@ h1::before, h1::after {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 600px;
+    max-width: 500px;
     background-color: var(--background-color);
-    padding: 2rem;
+    padding: 1.5rem;
     border: none;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow: auto;
     text-align: center;
     display: flex;
@@ -298,12 +298,12 @@ h1::before, h1::after {
 
 #modal-title {
     font-family: var(--title-font);
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     text-align: center;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
     letter-spacing: 0.03em;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
     line-height: 1.2;
@@ -323,30 +323,31 @@ h1::before, h1::after {
 }
 
 #modal-image {
-    width: auto;
+    width: 100%; /* Make image width consistent with text */
     max-width: 100%;
     height: auto;
-    max-height: 70vh;
+    max-height: 45vh; /* Allow slightly taller image */
     margin: 0;
-    display: inline-block;
+    display: block; /* Changed to block for consistent sizing */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    object-fit: contain; /* Preserve aspect ratio */
 }
 
 #modal-description {
     line-height: 1.5;
-    font-size: 0.72rem; /* Smaller font size */
-    margin: 1.2rem 0 0;
+    font-size: 0.82rem; /* Original font size */
+    margin: 0.8rem 0 0;
     text-align: left;
     hyphens: none;
     font-family: var(--body-font);
     font-style: normal;
-    display: inline-block;
+    display: block; /* Changed to block for consistent sizing */
     width: 100%;
     font-weight: 400;
     letter-spacing: 0.01em;
     word-wrap: normal;
     overflow-wrap: break-word;
-    color: #555; /* Lighter text color */
+    color: #333; /* Darker text for better readability */
 }
 
 /* Footer styles */
@@ -504,16 +505,17 @@ footer {
     }
     
     #modal-image {
-        max-width: 100%;
+        width: 100%;
         height: auto;
-        max-height: none;
-        margin-bottom: 1rem;
+        max-height: 42vh; /* Allow slightly taller image on mobile */
+        margin-bottom: 0;
+        object-fit: contain;
     }
     
     #modal-title {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-        padding-bottom: 0.4rem;
+        font-size: 1.4rem;
+        margin-bottom: 0.4rem;
+        padding-bottom: 0.3rem;
     }
     
     #modal-title::after {
@@ -521,13 +523,14 @@ footer {
     }
     
     #modal-description {
-        font-size: 0.68rem;
+        font-size: 0.78rem; /* Original mobile font size */
         padding: 0;
         line-height: 1.4;
         font-style: normal;
         text-align: left;
         hyphens: none;
-        margin-top: 1rem;
+        margin-top: 0.7rem;
+        color: #333; /* Consistent dark color on mobile */
     }
     
     .contact-links {
