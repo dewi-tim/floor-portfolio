@@ -103,9 +103,12 @@ function openModal(itemId) {
                 modalImage.src = item.image + '?v=' + new Date().getTime();
                 modalImage.alt = item.title;
                 
-                // Hide the description element
+                // Show the description element
                 const descriptionElement = document.getElementById('modal-description');
-                descriptionElement.style.display = 'none';
+                
+                // Simple approach: replace \n with <br> tags
+                const formattedText = item.fullDescription.replace(/\n/g, '<br>');
+                descriptionElement.innerHTML = formattedText;
                 
                 // Show modal
                 const modal = document.getElementById('modal');

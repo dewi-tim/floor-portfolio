@@ -333,9 +333,9 @@ h1::before, h1::after {
 }
 
 #modal-description {
-    line-height: 1.6;
-    font-size: 0.82rem;
-    margin: 0;
+    line-height: 1.5;
+    font-size: 0.72rem; /* Smaller font size */
+    margin: 1.2rem 0 0;
     text-align: left;
     hyphens: none;
     font-family: var(--body-font);
@@ -346,6 +346,7 @@ h1::before, h1::after {
     letter-spacing: 0.01em;
     word-wrap: normal;
     overflow-wrap: break-word;
+    color: #555; /* Lighter text color */
 }
 
 /* Footer styles */
@@ -520,12 +521,13 @@ footer {
     }
     
     #modal-description {
-        font-size: 0.78rem;
+        font-size: 0.68rem;
         padding: 0;
-        line-height: 1.5;
+        line-height: 1.4;
         font-style: normal;
         text-align: left;
         hyphens: none;
+        margin-top: 1rem;
     }
     
     .contact-links {
