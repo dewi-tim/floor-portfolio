@@ -1,68 +1,69 @@
 {
   "items": [
     {
+      "title": "Altare di Primavera",
+      "shortDescription": "Early spring wedding cake with almond olive oil, white chocolate pistachio ganache, and rhubarb jelly.",
+      "fullDescription": "For Simone and Ewout\u2019s Tuscan-inspired wedding, I designed a custom almond olive oil cake to follow their five-course dinner at Toscanini.\n\nThe cake featured layers of white chocolate and roasted pistachio ganache; rich, smooth, and slightly salty to contrast the almond base. I poached fresh rhubarb in a syrup of blood orange juice and jasmine tea leaves, then used the infused syrup to create a translucent jelly top.\n\nThis added a jewel-like stained-glass effect that caught the natural light beautifully. The cake was finished with a sculptural floral arrangement, using the top as a vase-like base. The structured, glassy surface contrasted with the loose wildflower arrangement curated by Simone herself, bringing together texture, flavor, and aesthetic in one centerpiece.",
       "id": 1,
-      "title": "Meringue Citron",
-      "thumbnail": "img/optimized/png/pastry1-square.png?v=2",
-      "image": "img/optimized/jpg/pastry1.jpg?v=2",
-      "shortDescription": "Delicate swirled meringue with lemon curd",
-      "fullDescription": "Our signature lemon meringue features a hand-piped swirl of crisp meringue atop a vibrant lemon curd base. The meringue is torched to perfection, creating a golden exterior while maintaining a soft, marshmallow-like interior. The balance of sweet meringue and tangy lemon creates a perfect harmony of flavors."
+      "thumbnail": "images/pastry1-square.png",
+      "image": "images/pastry1.jpeg"
     },
     {
+      "title": "Honey Bun",
+      "shortDescription": "Twisted honey bun made from croissant scraps, finished with smoked salt and a honey butter glaze.",
+      "fullDescription": "I developed this bun by reworking scraps of laminated croissant dough. I separated the larger, bready pieces to form a new base dough, then used the more finely laminated scraps as a butter block, essentially recreating the lamination process from leftovers.\n\nThe result was an evenly layered dough made entirely from mixed scraps, which felt like a small magic trick, since their origin was from so many different doughs.\n\nThe filling is simple but refined: a sweet honey butter with crunchy smoked salt. I brushed the baked buns with a syrup made from the same ingredients to give them a glossy finish and a clean, balanced flavor.",
       "id": 2,
-      "title": "Dôme d'Agrumes",
-      "thumbnail": "img/optimized/png/pastry2-square.png?v=2",
-      "image": "img/optimized/jpg/pastry2.jpg?v=2",
-      "shortDescription": "Geometric amber dome with edible flowers",
-      "fullDescription": "This stunning amber-hued dome showcases our mastery of modern patisserie techniques. The faceted exterior reveals a honey-citrus gelée encasing delicate edible flowers. Perfect for special occasions, this jewel-like creation pairs beautifully with our afternoon tea service."
+      "thumbnail": "images/pastry2-square.png",
+      "image": "images/pastry2.jpeg"
     },
     {
+      "title": "Pavlova Nero",
+      "shortDescription": "Crunchy-chewy meringue with mascarpone cream and balsamic roasted grapes.",
+      "fullDescription": "I made this pastry for Easter, using a slow-baked meringue as the base \u2014 light, crisp on the outside, soft and chewy inside. It acts like a little basket, holding slightly melted Easter eggs in the center.\n\nThe balsamic-thyme roasted grapes cut through the sweetness with a deep, tangy flavor, balancing everything out. Simple, airy, and just a bit unexpected.",
       "id": 3,
-      "title": "Entremets Pomme Verte",
-      "thumbnail": "img/optimized/png/pastry3-square.png?v=2",
-      "image": "img/optimized/jpg/pastry3.jpg?v=2",
-      "shortDescription": "Glossy green apple entremet with chocolate leaves",
-      "fullDescription": "Our apple entremet features a mirror-glazed exterior in vibrant green, mimicking the glossy skin of a fresh apple. The sculptural chocolate leaves add an artistic touch to this modern creation. Inside, layers of apple mousse, cinnamon biscuit, and caramel create a symphony of autumn flavors."
+      "thumbnail": "images/pastry3-square.png",
+      "image": "images/pastry3.jpeg"
     },
     {
+      "title": "Seasonal Focaccia",
+      "shortDescription": "Focaccia with sweet potato, saffron cream, and samphire.",
+      "fullDescription": "Each week, I create seasonal focaccia combinations using local meats and fresh, in-season vegetables. I pay close attention to texture, aiming for a focaccia that\u2019s light, moist, and rich with infused olive oil. Baking seasonal vegetables directly into the dough subtly flavors it and adds depth.\n\nI love pairing fresh cheeses like ricotta, gorgonzola, or stracciatella with something sharp or crunchy \u2014crispy nduja, samphire, or toasted nuts, for example. The possibilities are endless, especially when working with Kometen\u2019s beautifully fermented sourdough base.",
       "id": 4,
-      "title": "Croissant Framboise",
-      "thumbnail": "img/optimized/png/pastry4-square.png?v=2",
-      "image": "img/optimized/jpg/pastry4.jpg?v=2",
-      "shortDescription": "Red-tinted butter croissant with berry essence",
-      "fullDescription": "This striking raspberry-tinted croissant is our signature morning pastry. The dough is laminated with butter infused with freeze-dried raspberries, creating not only its distinctive color but also subtle berry notes throughout the 27 layers. The exterior shatters beautifully while the interior remains soft and airy."
+      "thumbnail": "images/pastry8-square.png",
+      "image": "images/pastry8.jpeg"
     },
     {
+      "title": "The Third Line",
+      "shortDescription": "Three-layered panna cotta jelly with toasted rice, chocolate ganache, and saffron grapefruit.",
+      "fullDescription": "This cube-style pastry opens up endless creative possibilities and lately, I\u2019ve been drawn to the earthy, nutty depth of toasted brown rice. I infuse it into creams and ganaches, which adds a subtle roasted flavor and a delicate starchiness that gives the panna cotta an unexpectedly soft, silky texture.\n\nThe dark chocolate to cream ratio in the ganache is intentionally high, making it bold and intense, therefore it melts effortlessly on the tongue. A layer of grapefruit\u2013saffron jelly tops it all, bringing a fragrant, slightly sweet brightness that balances the richness and ties everything together into a light, addictive bite.",
       "id": 5,
-      "title": "Éclair au Chocolat",
-      "thumbnail": "img/optimized/png/pastry5-square.png?v=2",
-      "image": "img/optimized/jpg/pastry5.jpg?v=2",
-      "shortDescription": "Classic chocolate éclair with glossy ganache",
-      "fullDescription": "Our chocolate éclair stays true to tradition while achieving perfection in every detail. The choux pastry is baked to achieve a crisp exterior and hollow center, then filled with rich chocolate crème pâtissière. The top is glazed with a mirror-like chocolate ganache and adorned with a delicate gold leaf."
-    },
+      "thumbnail": "images/pastry7-square.png",
+      "image": "images/pastry7.jpeg"
+    }, 
     {
+      "title": "Dark Coast Creature",
+      "shortDescription": "Babka bun made from croissant scraps, filled with dark chocolate and sea buckthorn jam.",
+      "fullDescription": "In a bakery producing over 4,000 croissants a week, dough scraps are inevitable. I began repurposing the laminated offcuts by layering and flattening them into a new dough, similar to puff pastry, characterised by the endless layers.\n\nThe result is an ultra-buttery bun, filled with dark chocolate and a sharp, fruity sea buckthorn compote that cuts through the richness beautifully.",
       "id": 6,
-      "title": "Cube Noir",
-      "thumbnail": "img/optimized/png/pastry6-square.png?v=2",
-      "image": "img/optimized/jpg/pastry6.jpg?v=2",
-      "shortDescription": "Minimalist black cube with geometric precision",
-      "fullDescription": "Our signature architectural dessert presents a perfect black cube of extraordinary precision. The velvet-smooth exterior encases layers of dark chocolate mousse, coffee cremeux, and a crunchy praline base. This striking modern creation exemplifies our philosophy of combining artistic expression with exceptional flavor."
+      "thumbnail": "images/pastry6-square.png",
+      "image": "images/pastry6.jpeg"
     },
+    
     {
+      "title": "Psychedelic Spaghetti",
+      "shortDescription": "Extravagant birthday cake with pistachio financier, matcha ganache, and blood orange curd.",
+      "fullDescription": "A bold celebration of all my favorite flavors, intuitively decorated, bombastic and eclectic, my renaissance. A pistachio financier base with lemon-poached berries, layered with matcha\u2013pistachio ganache, from scratch mascarpone cream, and a blood orange curd.\n\nInspired by the playful mess of spaghetti bolognese and the delicacy of enoki mushrooms \u2014 a little surreal, a little camp, and just extravagant enough for a 21st birthday cake.",
       "id": 7,
-      "title": "Tour de Macarons",
-      "thumbnail": "img/optimized/png/pastry7-square.png?v=2",
-      "image": "img/optimized/jpg/pastry7.jpg?v=2",
-      "shortDescription": "Layered macaron tower with pistachio and rose",
-      "fullDescription": "This elegant tower showcases our perfectly crafted macarons in graduated sizes. Each shell features our signature ruffled foot and smooth dome. The delicate pink shells encase a pistachio ganache, garnished with rose petals and pistachios. Equally suited for an afternoon treat or a celebration centerpiece."
+      "thumbnail": "images/pastry5-square.png",
+      "image": "images/pastry5.jpeg"
     },
     {
+      "title": "Exploded Salmon Cake",
+      "shortDescription": "Sculptural vanilla-berry loaf inspired by salmon anatomy, made for a Bon Iver event.",
+      "fullDescription": "This cake, created for a collaboration between Kometen Brood Caf\u00e9 and Bon Iver, explored exactly the tension between disgust and delicacy. Inspired by the anatomy of a salmon, I sculpted the body from seven olive oil vanilla loaf cakes, each filled with a bright, sweet berry compote (nothing fishy involved).\n\nEvery detail was hand-carved and piped, from fins to open belly, with edible glitter used to mimic the real fish scales. The result was unsettling, yet impressive.",
       "id": 8,
-      "title": "Tarte Rustique aux Pommes",
-      "thumbnail": "img/optimized/png/pastry8-square.png?v=2",
-      "image": "img/optimized/jpg/pastry8.jpg?v=2",
-      "shortDescription": "Rustic apple tart with caramelized edges",
-      "fullDescription": "Our rustic apple tart celebrates the simple beauty of seasonal fruit. Thinly sliced apples are arranged in a spiral pattern over buttery pastry with folded edges. During baking, the fruit caramelizes and the pastry achieves a perfect golden hue. Finished with a light brush of our house-made apple caramel."
+      "thumbnail": "images/pastry4-square.png",
+      "image": "images/pastry4.jpeg"
     }
   ]
 }

@@ -96,8 +96,12 @@ function openModal(itemId) {
                 modalImage.src = item.image + '?v=' + new Date().getTime();
                 modalImage.alt = item.title;
                 
-                // Set description
-                document.getElementById('modal-description').textContent = item.fullDescription;
+                // Set description and handle newlines
+                const descriptionElement = document.getElementById('modal-description');
+                
+                // Simple approach: replace \n with <br> tags
+                const formattedText = item.fullDescription.replace(/\n/g, '<br>');
+                descriptionElement.innerHTML = formattedText;
                 
                 // Show modal
                 const modal = document.getElementById('modal');
