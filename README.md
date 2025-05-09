@@ -47,4 +47,4 @@ To customize the styling, edit `css/styles.css`. The design uses a paper-like ba
 
 ## License
 
-Open source - free to use and modify
+Open source - free to use and modify besides images
