@@ -49,6 +49,7 @@ body {
     margin: 0 auto;
     height: 100%;
     box-sizing: border-box;
+    background-color: var(--background-color); /* Ensure consistent background */
 }
 
 main {
@@ -74,6 +75,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: var(--background-color); /* Ensure consistent background */
 }
 
 .header-rule {
@@ -83,16 +85,9 @@ header {
     margin: 1.5rem 0 1.2rem;
 }
 
+/* Remove the header background gradient to ensure consistent background on mobile */
 header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background-image: radial-gradient(circle at 30% 20%, rgba(139, 125, 107, 0.03) 0%, transparent 60%),
-                      radial-gradient(circle at 70% 65%, rgba(139, 125, 107, 0.03) 0%, transparent 60%);
-    z-index: 0; /* Changed from -1 to prevent header being hidden */
+    content: none;
 }
 
 h1 {
@@ -427,6 +422,7 @@ footer {
     .container {
         min-height: 100vh;
         max-height: none; /* Remove height constraint */
+        background-color: var(--background-color); /* Ensure consistent background */
     }
     
     .menu-grid {
