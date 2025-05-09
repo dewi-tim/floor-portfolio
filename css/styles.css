@@ -321,14 +321,14 @@ h1::before, h1::after {
 }
 
 #modal-image {
-    max-width: none; /* Allow image to be wider than container */
-    width: calc(100% + 3rem); /* Extend beyond padding */
+    max-width: 100%; /* Limit width to text width */
+    width: auto; /* Allow natural width */
     height: auto;
-    max-height: 45vh; /* Allow slightly taller image */
-    margin: 0 -1.5rem; /* Negative margins to extend beyond padding */
-    display: block; /* Changed to block for consistent sizing */
+    max-height: 45vh; /* Limit height */
+    margin: 0 auto; /* Center the image */
+    display: block;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    object-fit: contain; /* Preserve aspect ratio */
+    object-fit: scale-down; /* Scale down if needed */
 }
 
 #modal-description {
@@ -505,11 +505,12 @@ footer {
     }
     
     #modal-image {
-        width: calc(100% + 2rem); /* Account for smaller padding on mobile */
-        margin: 0 -1rem; /* Negative margins to match mobile padding */
+        max-width: 100%; /* Limit width to text width */
+        width: auto; /* Allow natural width */
         height: auto;
-        max-height: 42vh; /* Allow slightly taller image on mobile */
-        object-fit: contain; /* Preserve aspect ratio */
+        max-height: 42vh; /* Limit height */
+        margin: 0 auto; /* Center the image */
+        object-fit: scale-down; /* Scale down if needed */
     }
     
     #modal-title {
