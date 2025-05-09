@@ -126,6 +126,9 @@ h1::before, h1::after {
     width: auto;
     background-color: transparent;
     max-width: 90%;
+    white-space: nowrap; /* Prevent line breaks */
+    overflow: hidden; /* Prevent overflow */
+    text-overflow: ellipsis; /* Show ellipsis if text overflows */
 }
 
 .subtitle::before, .subtitle::after {
@@ -413,6 +416,10 @@ footer {
         --cell-padding: 0.4rem;
     }
     
+    .subtitle {
+        font-size: 0.68rem; /* Smaller font on mobile */
+    }
+    
     body, html {
         height: 100%;
         overflow: auto; /* Allow scrolling when content exceeds viewport */
@@ -541,6 +548,12 @@ footer {
         --cell-padding: 0.3rem;
     }
     
+    .subtitle {
+        font-size: 0.63rem; /* Even smaller font on very small screens */
+        max-width: 95%; /* Allow more width */
+        letter-spacing: 0.04em; /* Reduce letter spacing */
+    }
+    
     .menu-grid {
         grid-gap: 5px;
     }
@@ -610,3 +623,12 @@ footer {
 }
 
 /* Modal styles for mobile already covered in media query above */
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .subtitle {
+        font-size: 0.58rem; /* Smallest font size */
+        max-width: 98%;
+        letter-spacing: 0.02em;
+    }
+}
