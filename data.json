@@ -7,7 +7,7 @@
       "id": 1,
       "thumbnail": "images/pastry1-square.png",
       "image": "images/pastry1.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1
     },
     {
       "title": "Honey Bun",
@@ -16,7 +16,7 @@
       "id": 2,
       "thumbnail": "images/pastry2-square.png",
       "image": "images/pastry2.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1
     },
     {
       "title": "Pavlova Nero",
@@ -25,7 +25,7 @@
       "id": 3,
       "thumbnail": "images/pastry3-square.png",
       "image": "images/pastry3.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1
     },
     {
       "title": "Seasonal Focaccia",
@@ -34,7 +34,7 @@
       "id": 4,
       "thumbnail": "images/pastry8-square.png",
       "image": "images/pastry8.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1.27
     },
     {
       "title": "The Third Line",
@@ -43,7 +43,7 @@
       "id": 5,
       "thumbnail": "images/pastry7-square.png",
       "image": "images/pastry7.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1.5
     },
     {
       "title": "Dark Coast Creature",
@@ -52,7 +52,7 @@
       "id": 6,
       "thumbnail": "images/pastry6-square.png",
       "image": "images/pastry6.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1
     },
     {
       "title": "Psychedelic Spaghetti",
@@ -61,7 +61,7 @@
       "id": 7,
       "thumbnail": "images/pastry5-square.png",
       "image": "images/pastry5.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1
     },
     {
       "title": "Exploded Salmon Cake",
@@ -70,7 +70,7 @@
       "id": 8,
       "thumbnail": "images/pastry4-square.png",
       "image": "images/pastry4.jpeg",
-      "aspectRatio": 0.75
+      "aspectRatio": 1.59
     }
   ]
 }
