@@ -523,7 +523,7 @@
         <div class="portrait-modal-content" id="portrait-modal-content">
             <div class="portrait-modal-inner">
                 <button class="close-button" onclick="closePortraitModal()">&times;</button>
-                <video id="portrait-video" controls playsinline>
+                <video id="portrait-video" playsinline muted loop>
                     <source src="./images/floor.mp4" type="video/mp4">
                 </video>
             </div>
@@ -724,6 +724,7 @@
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             video.currentTime = 0;
+            video.play();
             setTimeout(window.applyPortraitTornPaper, 50);
         }
 
