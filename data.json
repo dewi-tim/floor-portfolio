@@ -6,7 +6,8 @@
       "fullDescription": "A custom almond olive oil cake for a Tuscan-inspired wedding. Layers of white chocolate and roasted pistachio ganache contrast with the almond base.\n\nThe top features a translucent blood orange and jasmine tea jelly, creating a jewel-like effect. A sculptural floral arrangement completed the design, bringing together flavor and aesthetics.",
       "id": 1,
       "thumbnail": "images/pastry1-square.png",
-      "image": "images/pastry1.jpeg"
+      "image": "images/pastry1.jpeg",
+      "aspectRatio": 0.75
     },
     {
       "title": "Honey Bun",
@@ -14,7 +15,8 @@
       "fullDescription": "A creative upcycling of croissant dough scraps. I re-laminated the pieces into a new layered dough, creating an evenly structured base from mixed remnants.\n\nThe filling features honey butter with smoked salt. I brushed the baked buns with a matching syrup for a glossy finish and balanced flavor profile.",
       "id": 2,
       "thumbnail": "images/pastry2-square.png",
-      "image": "images/pastry2.jpeg"
+      "image": "images/pastry2.jpeg",
+      "aspectRatio": 0.75
     },
     {
       "title": "Pavlova Nero",
@@ -22,7 +24,8 @@
       "fullDescription": "An Easter-inspired pastry with a slow-baked meringue base — crisp outside, chewy inside. The shell cradles slightly melted chocolate and fresh fruit.\n\nBalsamic-thyme roasted grapes provide tangy contrast to the sweet meringue. Simple yet unexpected.",
       "id": 3,
       "thumbnail": "images/pastry3-square.png",
-      "image": "images/pastry3.jpeg"
+      "image": "images/pastry3.jpeg",
+      "aspectRatio": 0.75
     },
     {
       "title": "Seasonal Focaccia",
@@ -30,7 +33,8 @@
       "fullDescription": "Weekly changing focaccia featuring local, seasonal ingredients. This version combines sweet potato with saffron cream and samphire for contrasting textures.\n\nBaked on a sourdough base rich with infused olive oil. The vegetables are incorporated directly into the dough for depth of flavor.",
       "id": 4,
       "thumbnail": "images/pastry8-square.png",
-      "image": "images/pastry8.jpeg"
+      "image": "images/pastry8.jpeg",
+      "aspectRatio": 0.75
     },
     {
       "title": "The Third Line",
@@ -38,24 +42,26 @@
       "fullDescription": "A precise cube-style pastry with three distinct layers. The base features toasted rice-infused panna cotta with a silky, unexpected texture.\n\nThe middle layer is a rich chocolate ganache with a high cocoa content. Topped with grapefruit-saffron jelly for brightness and aromatic contrast.",
       "id": 5,
       "thumbnail": "images/pastry7-square.png",
-      "image": "images/pastry7.jpeg"
-    }, 
+      "image": "images/pastry7.jpeg",
+      "aspectRatio": 0.75
+    },
     {
       "title": "Dark Coast Creature",
       "shortDescription": "Babka bun made from croissant scraps, filled with dark chocolate and sea buckthorn jam.",
       "fullDescription": "In a bakery producing over 4,000 croissants a week, dough scraps are inevitable. I began repurposing the laminated offcuts by layering and flattening them into a new dough, similar to puff pastry, characterised by the endless layers.\n\nThe result is an ultra-buttery bun, filled with dark chocolate and a sharp, fruity sea buckthorn compote that cuts through the richness beautifully.",
       "id": 6,
       "thumbnail": "images/pastry6-square.png",
-      "image": "images/pastry6.jpeg"
+      "image": "images/pastry6.jpeg",
+      "aspectRatio": 0.75
     },
-    
     {
       "title": "Psychedelic Spaghetti",
       "shortDescription": "Extravagant birthday cake with pistachio financier, matcha ganache, and blood orange curd.",
       "fullDescription": "A birthday cake built on contrasting flavors. Pistachio financier base with lemon-poached berries, layered with matcha-pistachio ganache and blood orange curd.\n\nThe decoration draws inspiration from both pasta and fungi forms, creating a playful, sculptural appearance.",
       "id": 7,
       "thumbnail": "images/pastry5-square.png",
-      "image": "images/pastry5.jpeg"
+      "image": "images/pastry5.jpeg",
+      "aspectRatio": 0.75
     },
     {
       "title": "Exploded Salmon Cake",
@@ -63,7 +69,8 @@
       "fullDescription": "A sculptural cake created for a Kometen Brood Café and Bon Iver collaboration. Modeled after salmon anatomy using seven vanilla loaf cakes filled with berry compote.\n\nHand-carved details and edible glitter scales complete the illusion. An exploration of the boundary between appetizing and unsettling.",
       "id": 8,
       "thumbnail": "images/pastry4-square.png",
-      "image": "images/pastry4.jpeg"
+      "image": "images/pastry4.jpeg",
+      "aspectRatio": 0.75
     }
   ]
 }

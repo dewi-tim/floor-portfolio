@@ -332,14 +332,14 @@
 
         #modal-image {
             max-width: 100%;
-            width: auto;
-            height: auto;
-            max-height: 30vh;
+            height: 30vh;
+            object-fit: cover;
             margin: 0 auto 0.8rem;
             display: block;
             border-radius: 4px;
             box-shadow: 4px 4px 0 var(--coral-light);
             transform: rotate(1deg);
+            background: var(--cream-dark);
         }
 
         #modal-description {
@@ -744,6 +744,14 @@
                         document.getElementById('modal-title').textContent = item.title;
 
                         const modalImage = document.getElementById('modal-image');
+
+                        // Pre-size the image using aspect ratio before loading
+                        const aspectRatio = item.aspectRatio || 0.75;
+                        modalImage.style.aspectRatio = aspectRatio;
+                        modalImage.style.width = 'auto';
+                        modalImage.style.height = '30vh';
+
+                        // Set src after sizing
                         modalImage.src = item.image + '?v=' + new Date().getTime();
                         modalImage.alt = item.title;
 
@@ -755,16 +763,8 @@
                         modal.style.display = 'block';
                         document.body.style.overflow = 'hidden';
 
-                        // Apply torn paper effect after image loads (or immediately if cached)
-                        const applyTornPaperOnLoad = () => {
-                            setTimeout(window.applyTornPaper, 10);
-                        };
-                        if (modalImage.complete) {
-                            applyTornPaperOnLoad();
-                        } else {
-                            modalImage.onload = applyTornPaperOnLoad;
-                            modalImage.onerror = applyTornPaperOnLoad; // Apply even if image fails
-                        }
+                        // Apply torn paper immediately since size is known
+                        setTimeout(window.applyTornPaper, 10);
 
                         setTimeout(() => {
                             document.getElementById('modal-title').focus();
