@@ -37,7 +37,9 @@
         }
 
         html, body {
-            min-height: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
         }
 
         body {
@@ -45,8 +47,8 @@
             background: var(--cream);
             color: #3D3D3D;
             line-height: 1.6;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: auto 1fr;
         }
 
         /* Paper grain overlay */
@@ -60,7 +62,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
-        /* Stars background */
+        /* Stars background - behind everything */
         .stars-bg {
             position: fixed;
             top: 0;
@@ -68,7 +70,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
             overflow: hidden;
         }
 
@@ -95,14 +97,13 @@
                 rgba(27, 156, 133, 0.05) 35px
             );
             pointer-events: none;
-            z-index: 1;
+            z-index: 2;
         }
 
-        /* Sticky header area - max 1/3 viewport */
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* Header area - no background, stars visible through */
+        .site-header {
+            position: relative;
+            z-index: 10;
             padding: 0.5rem 1rem;
             max-height: 33vh;
             display: flex;
@@ -110,10 +111,16 @@
             justify-content: center;
         }
 
+        /* Scroll container - content scrolls here, never overlaps header */
+        .scroll-container {
+            position: relative;
+            z-index: 10;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
         /* Main layout */
         .page-wrapper {
-            position: relative;
-            z-index: 5;
             max-width: 950px;
             margin: 0 auto;
             width: 100%;
@@ -141,7 +148,7 @@
             display: flex;
             justify-content: center;
             gap: 0.6rem;
-            padding: 0.4rem 0;
+            padding: 0.4rem 0 0.8rem;
             flex-wrap: wrap;
         }
 
@@ -153,26 +160,24 @@
             padding: 0.4rem 1rem;
             border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
             transition: all 0.3s ease;
-            filter: url(#crayon-text);
         }
 
         nav a:nth-child(1) { background: var(--pink-light); color: var(--pink); }
         nav a:nth-child(2) { background: var(--cyan-light); color: var(--cyan); }
         nav a:nth-child(3) { background: var(--yellow-light); color: var(--brown); }
-        nav a:nth-child(4) { background: var(--green-light); color: var(--green); }
 
         nav a:hover {
             transform: rotate(-3deg) scale(1.08);
             box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
         }
 
-        nav a.active:not([target="_blank"]) {
+        nav a.active {
             transform: rotate(-3deg) scale(1.1);
             box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
         }
 
-        nav a[target="_blank"]:focus {
-            outline: none;
+        /* Radio button behavior: deselect active when hovering another */
+        nav:has(a:not(.active):hover) a.active {
             transform: none;
             box-shadow: none;
         }
@@ -255,15 +260,7 @@
         }
 
         .item-description {
-            font-size: clamp(0.55rem, 1.2vw, 0.7rem);
-            text-align: center;
-            color: #666;
-            line-height: 1.25;
-            margin-top: 0.3rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            display: none;
         }
 
         /* Modal - Torn paper effect */
@@ -416,23 +413,23 @@
     <div class="stars-bg" aria-hidden="true"></div>
     <div class="stripe-bg" aria-hidden="true"></div>
 
-    <div class="sticky-header">
+    <div class="site-header">
         <div class="page-wrapper">
             <header>
                 <img src="./logo_with_text.png" alt="Bakes of the Floor" class="logo-image">
             </header>
 
             <nav>
-                <a href="index.html">about</a>
+                <a href="contact.html">contact</a>
                 <a href="gallery.html" class="active">gallery</a>
                 <a href="cv.html">cv</a>
-                <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer">order</a>
             </nav>
         </div>
     </div>
 
-    <div class="page-wrapper">
-        <div class="content-wrapper">
+    <div class="scroll-container">
+        <div class="page-wrapper">
+            <div class="content-wrapper">
             <main>
                 <div class="menu-grid" id="menu-grid">
                     <!-- Items populated by JavaScript -->
@@ -444,6 +441,7 @@
                     &#127856; &#127874; &#129473; &#127846; &#127871;
                 </div>
             </footer>
+            </div>
         </div>
     </div>
 
@@ -757,8 +755,16 @@
                         modal.style.display = 'block';
                         document.body.style.overflow = 'hidden';
 
-                        // Apply torn paper effect after modal is visible
-                        setTimeout(window.applyTornPaper, 50);
+                        // Apply torn paper effect after image loads (or immediately if cached)
+                        const applyTornPaperOnLoad = () => {
+                            setTimeout(window.applyTornPaper, 10);
+                        };
+                        if (modalImage.complete) {
+                            applyTornPaperOnLoad();
+                        } else {
+                            modalImage.onload = applyTornPaperOnLoad;
+                            modalImage.onerror = applyTornPaperOnLoad; // Apply even if image fails
+                        }
 
                         setTimeout(() => {
                             document.getElementById('modal-title').focus();

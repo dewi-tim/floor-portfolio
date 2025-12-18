@@ -5,3 +5,9 @@ archive-images/
 
 # DS_Store
 .DS_Store
+
+# Development/reference folders
+cute/
+old/
+reference/
+venv/
