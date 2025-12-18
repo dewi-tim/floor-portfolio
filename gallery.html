@@ -105,10 +105,15 @@
             position: relative;
             z-index: 10;
             padding: 0.5rem 1rem;
-            max-height: 33vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            overflow: visible;
+        }
+
+        /* Header max-width must match other pages */
+        .site-header .page-wrapper {
+            max-width: 800px;
         }
 
         /* Scroll container - content scrolls here, never overlaps header */
@@ -119,11 +124,14 @@
             overflow-x: hidden;
         }
 
+        .scroll-container > .page-wrapper {
+            margin: auto;
+        }
+
         /* Main layout */
         .page-wrapper {
             max-width: 950px;
             margin: 0 auto;
-            width: 100%;
         }
 
         .content-wrapper {
@@ -374,20 +382,31 @@
             letter-spacing: 0.25rem;
         }
 
-        /* Responsive */
+        /* Responsive - gallery grid */
         @media (max-width: 700px) {
             .menu-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
 
-            .page-wrapper {
+            .scroll-container .page-wrapper {
                 padding: 0.8rem;
+            }
+        }
+
+        /* Responsive - header/nav (consistent with other pages) */
+        @media (max-width: 600px) {
+            .site-header .page-wrapper {
+                padding: 1rem;
+            }
+
+            nav {
+                gap: 0.5rem;
             }
 
             nav a {
-                font-size: 0.95rem;
-                padding: 0.35rem 0.8rem;
+                font-size: 1rem;
+                padding: 0.4rem 0.9rem;
             }
         }
 
@@ -429,9 +448,9 @@
             </header>
 
             <nav>
-                <a href="contact.html">contact</a>
+                <a href="about.html">about</a>
                 <a href="gallery.html" class="active">gallery</a>
-                <a href="cv.html">cv</a>
+                <a href="contact.html">contact</a>
             </nav>
         </div>
     </div>

@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <title>Contact - Bakes of the Floor</title>
+    <title>CV - Floor ter Meulen</title>
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
@@ -13,6 +12,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
         :root {
             --cream: #FFF8F0;
             --cream-dark: #F0E4D4;
@@ -85,7 +89,6 @@
             50% { opacity: 0.55; transform: scale(1.15); }
         }
 
-        /* Stripe decoration */
         .stripe-bg {
             position: fixed;
             width: 100%;
@@ -106,10 +109,10 @@
             position: relative;
             z-index: 10;
             padding: 0.5rem 1rem;
+            max-height: 33vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow: visible;
         }
 
         /* Scroll container - content scrolls here, never overlaps header */
@@ -120,24 +123,17 @@
             overflow-x: hidden;
         }
 
-        .scroll-container > .page-wrapper {
-            margin: auto;
-        }
-
-        /* Main layout */
+        /* Layout */
         .page-wrapper {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
         .content-wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 67vh;
-            padding: 0 1.5rem 1.5rem;
+            padding: 0.5rem 1.5rem 1.5rem;
         }
 
-        /* Header with logo */
+        /* Header */
         header {
             text-align: center;
             padding: 0.3rem 0;
@@ -150,157 +146,188 @@
             object-fit: contain;
         }
 
-        /* Navigation */
-        nav {
+        /* Download button bar */
+        .download-bar {
             display: flex;
             justify-content: center;
-            gap: 0.6rem;
             padding: 0.4rem 0 0.8rem;
-            flex-wrap: wrap;
         }
 
-        nav a {
+        .download-btn {
             font-family: 'Gaegu', cursive;
             font-weight: 700;
             font-size: 1.1rem;
             text-decoration: none;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
             transition: all 0.3s ease;
+            background: var(--green-light);
+            color: var(--green);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        nav a:nth-child(1) { background: var(--pink-light); color: var(--pink); }
-        nav a:nth-child(2) { background: var(--cyan-light); color: var(--cyan); }
-        nav a:nth-child(3) { background: var(--yellow-light); color: var(--brown); }
-
-        nav a:hover {
+        .download-btn:hover {
             transform: rotate(-3deg) scale(1.08);
             box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
         }
 
-        nav a.active {
-            transform: rotate(-3deg) scale(1.1);
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
-        }
-
-        /* Radio button behavior */
-        nav:has(a:not(.active):hover) a.active {
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Main content area */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem 1rem;
-            gap: 1.5rem;
-        }
-
-        /* Contact box */
-        .contact-box {
+        /* CV Content */
+        .cv-container {
             position: relative;
-            background: white;
-            padding: 2rem;
-            max-width: 600px;
-            text-align: center;
+            background: transparent;
+            padding: 2.5rem;
         }
 
-        .contact-box > * {
+        .cv-container > * {
             position: relative;
             z-index: 1;
         }
 
-        .contact-title {
+        /* CV Header */
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px dashed var(--pink-light);
+        }
+
+        .cv-title-block {
+            flex: 1;
+        }
+
+        .cv-name {
             font-family: 'Lilita One', sans-serif;
             font-weight: 400;
-            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
             color: var(--pink);
+            line-height: 1.1;
             margin-bottom: 0.8rem;
         }
 
-        .contact-text {
-            font-size: clamp(1rem, 2.2vw, 1.1rem);
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-            color: #555;
+        .cv-contact {
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
-        /* Contact links */
-        .contact-links {
+        .cv-contact a {
+            color: var(--cyan);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .cv-contact a:hover {
+            color: var(--pink);
+            text-decoration: underline;
+        }
+
+        /* Section headings */
+        .section-title {
+            font-family: 'Lilita One', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: var(--cyan);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 2px solid var(--cyan-light);
+            display: inline-block;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Entries */
+        .entry {
+            margin: 1.2rem 0;
+            padding: 1rem 1rem 1rem 1.5rem;
+            position: relative;
+        }
+
+        .entry::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--pink-light);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .entry-header {
             display: flex;
-            gap: 0.6rem;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
+        .org {
+            font-family: 'Lilita One', sans-serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--pink);
+        }
+
+        .dates {
             font-family: 'Gaegu', cursive;
             font-weight: 700;
             font-size: 1rem;
-            text-decoration: none;
-            padding: 0.4rem 0.9rem;
-            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-            transition: all 0.3s ease;
-            justify-content: center;
-            white-space: nowrap;
-            min-width: 9rem;
-        }
-
-        @media (max-width: 620px) {
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        .contact-link:hover {
-            transform: rotate(-2deg) scale(1.05);
-        }
-
-        .contact-link.email {
-            background: var(--pink-light);
-            color: var(--pink);
-            box-shadow: 3px 3px 0 var(--cyan-light);
-        }
-
-        .contact-link.instagram {
-            background: var(--cyan-light);
-            color: var(--cyan);
-            box-shadow: 3px 3px 0 var(--pink-light);
-        }
-
-        .contact-link.order {
-            background: var(--yellow-light);
             color: var(--brown);
-            box-shadow: 3px 3px 0 var(--pink-light);
+            background: var(--yellow-light);
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
         }
 
-        .contact-link-icon {
-            font-size: 1.1rem;
+        .role {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .details {
+            margin: 0.5rem 0 0;
+            padding-left: 1.2rem;
+            list-style: none;
+        }
+
+        .details li {
+            margin: 0.4rem 0;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .details li::before {
+            content: "~";
+            position: absolute;
+            left: -1em;
+            color: var(--coral);
+            font-weight: bold;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 1rem;
-            flex-shrink: 0;
+            padding: 1.5rem;
         }
 
         .footer-doodles {
             font-size: 1.3rem;
             letter-spacing: 0.25rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
 
         .footer-tagline {
             font-family: 'Gaegu', cursive;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--brown);
         }
 
@@ -310,22 +337,152 @@
                 padding: 1rem;
             }
 
-            nav {
-                gap: 0.5rem;
-            }
-
-            nav a {
-                font-size: 1rem;
-                padding: 0.4rem 0.9rem;
-            }
-
-            .contact-box {
+            .cv-container {
                 padding: 1.5rem;
             }
 
-            .contact-links {
+            .cv-header {
                 flex-direction: column;
                 align-items: center;
+                text-align: center;
+            }
+
+            .entry-header {
+                flex-direction: column;
+            }
+
+            .dates {
+                align-self: flex-start;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            html, body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: visible;
+                background: var(--cream) !important;
+            }
+
+            body {
+                display: block;
+            }
+
+            body::after {
+                display: none !important;
+            }
+
+            .stars-bg,
+            .stripe-bg {
+                position: fixed !important;
+                display: block !important;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .site-header,
+            footer {
+                display: none !important;
+            }
+
+            .scroll-container {
+                overflow: visible;
+                padding: 5mm;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .page-wrapper {
+                max-width: 100%;
+                padding: 0;
+                width: 100%;
+            }
+
+            .content-wrapper {
+                padding: 0;
+            }
+
+            .cv-container {
+                background: white !important;
+                padding: 0.8rem 1.2rem;
+                overflow: visible;
+                border: 4px solid var(--pink-light);
+                border-radius: 8px;
+            }
+
+            .cv-container .wobbly-border {
+                display: none !important;
+            }
+
+            .cv-header {
+                margin-bottom: 0.6rem;
+                padding-bottom: 0.5rem;
+                gap: 1rem;
+            }
+
+            .cv-name {
+                font-size: 1.4rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .cv-contact {
+                font-size: 0.85rem;
+                line-height: 1.3;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+                margin: 0.6rem 0 0.4rem;
+            }
+
+            .entry {
+                margin: 0.4rem 0;
+                padding: 0.3rem 0.6rem 0.3rem 0.8rem;
+                page-break-inside: avoid;
+            }
+
+            .entry::before {
+                width: 3px;
+            }
+
+            .org {
+                font-size: 0.9rem;
+            }
+
+            .dates {
+                font-size: 0.75rem;
+                padding: 0.1rem 0.4rem;
+            }
+
+            .role {
+                font-size: 0.8rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .details {
+                margin: 0.2rem 0 0;
+                padding-left: 1rem;
+            }
+
+            .details li {
+                font-size: 0.75rem;
+                margin: 0.1rem 0;
+            }
+
+            .download-bar {
+                display: none !important;
             }
         }
     </style>
@@ -351,43 +508,110 @@
                 <img src="./logo_with_text.png" alt="Bakes of the Floor" class="logo-image">
             </header>
 
-            <nav>
-                <a href="about.html">about</a>
-                <a href="gallery.html">gallery</a>
-                <a href="contact.html" class="active">contact</a>
-            </nav>
+            <div class="download-bar">
+                <button class="download-btn" onclick="window.print()">
+                    <span>&#128196;</span>
+                    <span>save as pdf</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="scroll-container">
         <div class="page-wrapper">
             <div class="content-wrapper">
-            <main>
-                <div class="contact-box" id="contact-box">
-                    <h2 class="contact-title">Get in touch</h2>
-                    <p class="contact-text">
-                        Want to order a cake? Have a question? Just want to say hi?
-                        I'd love to hear from you.
-                    </p>
-
-                    <div class="contact-links">
-                        <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" class="contact-link order">
-                            <span class="contact-link-icon">&#127856;</span>
-                            <span>place an order</span>
-                        </a>
-
-                        <a href="https://instagram.com/bakesofthefloor" target="_blank" rel="noopener noreferrer" class="contact-link instagram">
-                            <span class="contact-link-icon">&#128247;</span>
-                            <span>instagram</span>
-                        </a>
-
-                        <a href="mailto:floortermeulen2004@gmail.com" class="contact-link email">
-                            <span class="contact-link-icon">&#128231;</span>
-                            <span>email me</span>
-                        </a>
+            <main class="cv-container" id="cv-container">
+            <div class="cv-header">
+                <div class="cv-title-block">
+                    <h2 class="cv-name">Floor ter Meulen</h2>
+                    <div class="cv-contact">
+                        <strong>Email:</strong> <a href="mailto:floortermeulen2004@gmail.com">floortermeulen2004@gmail.com</a><br>
+                        <strong>Instagram:</strong> <a href="https://instagram.com/bakesofthefloor" target="_blank">@bakesofthefloor</a><br>
+                        <strong>Portfolio:</strong> <a href="https://bakesofthefloor.amsterdam" target="_blank">bakesofthefloor.amsterdam</a>
                     </div>
                 </div>
-            </main>
+            </div>
+
+            <h3 class="section-title">Experience</h3>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">Kometen Brood & Caf&eacute;, Amsterdam</span>
+                    <span class="dates">Jun 2022 – Present</span>
+                </div>
+                <div class="role">Pastry Baker & Front-of-House Shift Lead</div>
+                <ul class="details">
+                    <li>Led daily production of 1,500+ viennoiserie items, with expertise in sourdough croissant and puff pastry lamination</li>
+                    <li>Created weekly seasonal pastry specials, zero-waste recipes; coached 12+ staff on busy shifts</li>
+                    <li>Maintained barista excellence (espresso dialing, latte art, workflow)</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">De Laatste Kruimel, Amsterdam</span>
+                    <span class="dates">Oct 2022 – Feb 2023</span>
+                </div>
+                <div class="role">Barista</div>
+                <ul class="details">
+                    <li>Operated in a high-volume specialty caf&eacute; serving global visitors</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">Stedelijk Museum, Amsterdam</span>
+                    <span class="dates">Oct 2022 – Jun 2023</span>
+                </div>
+                <div class="role">Blikopener (Peer Educator)</div>
+                <ul class="details">
+                    <li>Co-designed inclusive programming & ran youth-led workshops</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">DEGASTEN & Theatergroep Bambie</span>
+                    <span class="dates">2022 – 2023</span>
+                </div>
+                <div class="role">Physical Performer</div>
+                <ul class="details">
+                    <li>Created & toured an ensemble performance exploring care</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">Kaaspaleis Blijdorp, Rotterdam</span>
+                    <span class="dates">Sep 2020 – Aug 2022</span>
+                </div>
+                <div class="role">Cheese Specialist & Deli Assistant</div>
+                <ul class="details">
+                    <li>Advised on Dutch cheeses & curated custom platters</li>
+                </ul>
+            </div>
+
+            <h3 class="section-title">Education</h3>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">De TheaterHavo/VWO, Rotterdam</span>
+                    <span class="dates">2016 – 2022</span>
+                </div>
+                <div class="role">VWO Diploma</div>
+                <ul class="details">
+                    <li>Combined rigorous academics with 8 hrs/week of acting, singing & dance</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">KDVI Amsterdam</span>
+                    <span class="dates">2021</span>
+                </div>
+                <div class="role">Wiskunde B (Pre-University Mathematics B)</div>
+            </div>
+        </main>
 
             <footer>
                 <div class="footer-doodles" aria-hidden="true">
@@ -452,7 +676,7 @@
             }
         })();
 
-        // Wobbly border for contact box
+        // Wobbly border for CV container
         (function() {
             function seededRandom(seed) {
                 const x = Math.sin(seed) * 10000;
@@ -515,14 +739,15 @@
             }
 
             function init() {
-                const contactBox = document.getElementById('contact-box');
-                if (contactBox) {
-                    applyWobblyBorder(contactBox, '#FFBCD9', 42, 5);
+                const cvContainer = document.getElementById('cv-container');
+                if (cvContainer) {
+                    applyWobblyBorder(cvContainer, '#FFBCD9', 999, 5);
                 }
             }
 
             setTimeout(init, 100);
             window.addEventListener('resize', init);
+            window.addEventListener('beforeprint', init);
         })();
     </script>
 </body>
