@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>About - Bakes of the Floor</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="./favicon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8F0;
+            --cream-dark: #F0E4D4;
+            --pink: #FC2847;
+            --pink-light: #FFBCD9;
+            --cyan: #00B7EB;
+            --cyan-light: #9ACEEB;
+            --yellow: #FCD667;
+            --yellow-light: #FCF4A3;
+            --green: #00A86B;
+            --green-light: #76D7C4;
+            --coral: #FF5349;
+            --coral-light: #FFB97B;
+            --blue: #0066FF;
+            --brown: #9C6B30;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background: var(--cream);
+            color: #3D3D3D;
+            line-height: 1.6;
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+
+        /* Paper grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Stars background - behind everything */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            opacity: 0.45;
+            animation: twinkle 5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.35; transform: scale(1); }
+            50% { opacity: 0.55; transform: scale(1.15); }
+        }
+
+        /* Stripe decoration */
+        .stripe-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 30px,
+                rgba(27, 156, 133, 0.05) 30px,
+                rgba(27, 156, 133, 0.05) 35px
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Header area - no background, stars visible through */
+        .site-header {
+            position: relative;
+            z-index: 10;
+            padding: 0.25rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        /* Scroll container - content scrolls here, never overlaps header */
+        .scroll-container {
+            position: relative;
+            z-index: 10;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .scroll-container > .page-wrapper {
+            margin: auto;
+        }
+
+        /* Main layout */
+        .page-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            padding: 0 1rem 1rem;
+        }
+
+        /* Header with logo */
+        header {
+            text-align: center;
+        }
+
+        .logo-image {
+            display: block;
+            margin: 0 auto;
+            max-height: calc(33vh - 60px);
+            width: auto;
+            max-width: 90%;
+            object-fit: contain;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.2rem 0;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:nth-child(1) { background: var(--pink-light); color: var(--pink); }
+        nav a:nth-child(2) { background: var(--cyan-light); color: var(--cyan); }
+        nav a:nth-child(3) { background: var(--yellow-light); color: var(--brown); }
+
+        nav a:hover {
+            transform: rotate(-3deg) scale(1.08);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        nav a.active {
+            transform: rotate(-3deg) scale(1.1);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Radio button behavior */
+        nav:has(a:not(.active):hover) a.active {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Main content area */
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 1rem 1rem;
+            gap: 1rem;
+        }
+
+        /* About box with profile */
+        .about-box {
+            position: relative;
+            background: white;
+            padding: 2rem;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .about-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-header {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-intro {
+            flex: 1;
+        }
+
+        .about-intro p {
+            font-size: clamp(1rem, 2.2vw, 1.15rem);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .hand-underline {
+            position: relative;
+            display: inline;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a.hand-underline:hover {
+            color: var(--pink);
+        }
+
+        .hand-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M0,5 Q25,0 50,5 T100,5' stroke='%23FCD667' stroke-width='4' fill='none'/%3E%3C/svg%3E") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        /* Profile photo with hint */
+        .profile-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .profile-photo {
+            width: 110px;
+            height: 130px;
+            position: relative;
+            transform: rotate(3deg);
+            cursor: pointer;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow:
+                2px 2px 0 var(--pink-light),
+                4px 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Tape effect */
+        .profile-photo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 50px;
+            height: 20px;
+            background: rgba(252, 214, 103, 0.7);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .portrait-hint {
+            font-family: 'Gaegu', cursive;
+            font-size: 0.85rem;
+            color: var(--brown);
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        /* Background highlights */
+        .highlights {
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            border-top: 2px dashed var(--pink-light);
+        }
+
+        .highlights-title {
+            font-family: 'Lilita One', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            margin-bottom: 0.8rem;
+        }
+
+        .highlight-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .highlight-item {
+            font-size: 1rem;
+            line-height: 1.4;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .highlight-item::before {
+            content: "~";
+            position: absolute;
+            left: 0;
+            color: var(--coral);
+            font-weight: bold;
+        }
+
+        .highlight-item strong {
+            color: var(--pink);
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+        }
+
+        /* Download CV button */
+        .cv-download-wrapper {
+            text-align: center;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 2px dashed var(--green-light);
+        }
+
+        .cv-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: var(--green-light);
+            color: var(--green);
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            box-shadow: 3px 3px 0 var(--cyan-light);
+            transition: all 0.3s ease;
+        }
+
+        .cv-download:hover {
+            transform: rotate(-2deg) scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            flex-shrink: 0;
+        }
+
+        .footer-doodles {
+            font-size: 1.3rem;
+            letter-spacing: 0.25rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .footer-tagline {
+            font-family: 'Gaegu', cursive;
+            font-size: 0.9rem;
+            color: var(--brown);
+        }
+
+        .footer-tagline a {
+            color: var(--brown);
+            text-decoration: none;
+        }
+
+        .footer-tagline a:hover {
+            color: var(--pink);
+        }
+
+        /* Portrait modal */
+        .portrait-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .portrait-modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-1deg);
+            max-width: 90%;
+            max-height: 85vh;
+        }
+
+        .portrait-modal-inner {
+            position: relative;
+            z-index: 1;
+            padding: 1.5rem;
+        }
+
+        .portrait-modal video {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 4px;
+            box-shadow: 4px 4px 0 var(--pink-light);
+        }
+
+        .portrait-modal .close-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.8rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10;
+            color: var(--pink);
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+            background: none;
+            border: none;
+        }
+
+        .portrait-modal .close-button:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .scroll-container .page-wrapper {
+                padding: 1rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            nav a {
+                font-size: 1rem;
+                padding: 0.4rem 0.9rem;
+            }
+
+            .about-box {
+                padding: 1.5rem;
+            }
+
+            .about-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-wrapper {
+                order: -1;
+            }
+
+            .profile-photo {
+                width: 90px;
+                height: 105px;
+            }
+
+            .about-intro p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Filters -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+            <filter id="crayon-text" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Background decorations -->
+    <div class="stars-bg" aria-hidden="true"></div>
+    <div class="stripe-bg" aria-hidden="true"></div>
+
+    <div class="site-header">
+        <div class="page-wrapper">
+            <header>
+                <img src="./logo_with_text.png" alt="Bakes of the Floor" class="logo-image">
+            </header>
+
+            <nav>
+                <a href="about.html" class="active">about</a>
+                <a href="gallery.html">gallery</a>
+                <a href="contact.html">contact</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="scroll-container">
+        <div class="page-wrapper">
+            <div class="content-wrapper">
+            <main>
+                <div class="about-box" id="about-box">
+                    <div class="about-header">
+                        <div class="about-intro">
+                            <p>
+                                Hi! I'm Floor, a 21 year old cake artist and pastry chef from Amsterdam, currently based in Copenhagen. I started my pastry career 2 years ago at <a href="https://www.kometenbrood.nl/" target="_blank" class="hand-underline">Kometen Brood</a> where I fell in love with it. I did large scale production there, producing over 1500 items a day. During my time at <a href="https://uncommonams.com/" target="_blank" class="hand-underline">Uncommon Amsterdam</a> I learnt about precision, fermentation, and making pastries look like a piece of art. Now, along pastry chef <a href="https://instagram.com/aryanjafri" target="_blank" class="hand-underline">Aryan Jafri</a>, I'm going to continue my practice at Kani Bakery in Copenhagen. Besides working in bakeries I started my own cake business, specializing in whimsical, colorful designs.
+                            </p>
+                        </div>
+                        <div class="profile-wrapper">
+                            <div class="profile-photo" onclick="openPortraitModal()">
+                                <img src="./images/floor-square.jpeg" alt="Floor ter Meulen">
+                            </div>
+                            <span class="portrait-hint">&#8593; click me</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer>
+                <div class="footer-doodles" aria-hidden="true">
+                    &#127856; &#127874; &#129473; &#127846; &#127871;
+                </div>
+                <p class="footer-tagline">Bakery Floor, coming soon. · site by <a href="https://github.com/dewi-tim" target="_blank">@dewi-tim</a></p>
+            </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portrait Modal -->
+    <div class="portrait-modal" id="portrait-modal">
+        <div class="portrait-modal-content" id="portrait-modal-content">
+            <div class="portrait-modal-inner">
+                <button class="close-button" onclick="closePortraitModal()">&times;</button>
+                <video id="portrait-video" playsinline muted loop>
+                    <source src="./images/floor.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        (function() {
+            const colors = ['#FC2847', '#00B7EB', '#FCD667', '#00A86B', '#FF5349'];
+            const container = document.querySelector('.stars-bg');
+
+            for (let i = 0; i < 25; i++) {
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('viewBox', '0 0 50 50');
+                svg.setAttribute('class', 'star');
+                const size = 20 + Math.random() * 30;
+                svg.style.width = size + 'px';
+                svg.style.height = size + 'px';
+                svg.style.left = Math.random() * 100 + '%';
+                svg.style.top = Math.random() * 100 + '%';
+                svg.style.animationDelay = Math.random() * 4 + 's';
+                svg.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                if (Math.random() > 0.4) {
+                    svg.innerHTML = `<path d="M25,2 L28,20 L48,25 L28,30 L25,48 L22,30 L2,25 L22,20 Z" fill="${color}" opacity="0.7"/>`;
+                } else {
+                    svg.innerHTML = `<path d="M25,0 L27,22 L50,25 L27,28 L25,50 L23,28 L0,25 L23,22 Z" fill="${color}" opacity="0.6"/>`;
+                }
+
+                container.appendChild(svg);
+            }
+
+            for (let i = 0; i < 8; i++) {
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('viewBox', '0 0 40 40');
+                svg.setAttribute('class', 'star');
+                const size = 25 + Math.random() * 20;
+                svg.style.width = size + 'px';
+                svg.style.height = size + 'px';
+                svg.style.left = Math.random() * 100 + '%';
+                svg.style.top = Math.random() * 100 + '%';
+                svg.style.animationDelay = Math.random() * 4 + 's';
+                svg.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                svg.innerHTML = `
+                    <ellipse cx="20" cy="8" rx="6" ry="9" fill="${color}" opacity="0.6"/>
+                    <ellipse cx="20" cy="32" rx="6" ry="9" fill="${color}" opacity="0.6"/>
+                    <ellipse cx="8" cy="20" rx="9" ry="6" fill="${color}" opacity="0.6"/>
+                    <ellipse cx="32" cy="20" rx="9" ry="6" fill="${color}" opacity="0.6"/>
+                    <circle cx="20" cy="20" r="5" fill="${color}" opacity="0.8"/>
+                `;
+                container.appendChild(svg);
+            }
+        })();
+
+        // Wobbly border for about box
+        (function() {
+            function seededRandom(seed) {
+                const x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+
+            function generateWobblyRect(seed, w, h, padding = 8, wobble = 6) {
+                const rand = (i) => seededRandom(seed + i);
+                const p = padding;
+
+                const tl = { x: p + rand(1) * wobble, y: p + rand(2) * wobble };
+                const tr = { x: w - p - rand(3) * wobble, y: p + rand(4) * wobble };
+                const br = { x: w - p - rand(5) * wobble, y: h - p - rand(6) * wobble };
+                const bl = { x: p + rand(7) * wobble, y: h - p - rand(8) * wobble };
+
+                const cp1 = { x: w * 0.3 + (rand(9) - 0.5) * wobble, y: p + (rand(10) - 0.5) * wobble };
+                const cp2 = { x: w * 0.7 + (rand(11) - 0.5) * wobble, y: p + (rand(12) - 0.5) * wobble };
+                const cp3 = { x: w - p + (rand(13) - 0.5) * wobble, y: h * 0.3 + (rand(14) - 0.5) * wobble };
+                const cp4 = { x: w - p + (rand(15) - 0.5) * wobble, y: h * 0.7 + (rand(16) - 0.5) * wobble };
+                const cp5 = { x: w * 0.7 + (rand(17) - 0.5) * wobble, y: h - p + (rand(18) - 0.5) * wobble };
+                const cp6 = { x: w * 0.3 + (rand(19) - 0.5) * wobble, y: h - p + (rand(20) - 0.5) * wobble };
+                const cp7 = { x: p + (rand(21) - 0.5) * wobble, y: h * 0.7 + (rand(22) - 0.5) * wobble };
+                const cp8 = { x: p + (rand(23) - 0.5) * wobble, y: h * 0.3 + (rand(24) - 0.5) * wobble };
+
+                return `M${tl.x},${tl.y} ` +
+                       `Q${cp1.x},${cp1.y} ${(tl.x + tr.x) / 2},${(tl.y + tr.y) / 2 + (rand(25) - 0.5) * wobble * 0.5} ` +
+                       `Q${cp2.x},${cp2.y} ${tr.x},${tr.y} ` +
+                       `Q${cp3.x},${cp3.y} ${(tr.x + br.x) / 2 + (rand(26) - 0.5) * wobble * 0.5},${(tr.y + br.y) / 2} ` +
+                       `Q${cp4.x},${cp4.y} ${br.x},${br.y} ` +
+                       `Q${cp5.x},${cp5.y} ${(br.x + bl.x) / 2},${(br.y + bl.y) / 2 + (rand(27) - 0.5) * wobble * 0.5} ` +
+                       `Q${cp6.x},${cp6.y} ${bl.x},${bl.y} ` +
+                       `Q${cp7.x},${cp7.y} ${(bl.x + tl.x) / 2 + (rand(28) - 0.5) * wobble * 0.5},${(bl.y + tl.y) / 2} ` +
+                       `Q${cp8.x},${cp8.y} ${tl.x},${tl.y} Z`;
+            }
+
+            function applyWobblyBorder(element, color, seed, strokeWidth = 5) {
+                const existing = element.querySelector('.wobbly-border');
+                if (existing) existing.remove();
+
+                const rect = element.getBoundingClientRect();
+                const w = rect.width;
+                const h = rect.height;
+
+                if (w === 0 || h === 0) return;
+
+                const fillPath = generateWobblyRect(seed, w, h, 6, 5);
+                const strokePath = generateWobblyRect(seed, w, h, 3, 6);
+
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('class', 'wobbly-border');
+                svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+                svg.style.cssText = `position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;`;
+
+                svg.innerHTML = `
+                    <path d="${fillPath}" fill="white" stroke="none"/>
+                    <path d="${strokePath}" fill="none" stroke="${color}" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round"/>
+                `;
+
+                element.insertBefore(svg, element.firstChild);
+            }
+
+            function init() {
+                const aboutBox = document.getElementById('about-box');
+                if (aboutBox) {
+                    applyWobblyBorder(aboutBox, '#FFBCD9', 42, 5);
+                }
+            }
+
+            setTimeout(init, 100);
+            window.addEventListener('resize', init);
+
+            // Torn paper for portrait modal
+            function generateTornRect(seed, w, h, padding = 5, wobble = 12) {
+                const rand = (i) => seededRandom(seed + i);
+                const p = padding;
+                let path = '';
+                const segments = 20;
+
+                path += `M${p},${p + rand(1) * wobble}`;
+                for (let i = 1; i <= segments; i++) {
+                    const x = p + (w - 2 * p) * (i / segments);
+                    const y = p + (rand(i * 2) - 0.5) * wobble;
+                    path += ` L${x},${y}`;
+                }
+                for (let i = 1; i <= segments; i++) {
+                    const x = w - p + (rand(100 + i * 2) - 0.5) * wobble;
+                    const y = p + (h - 2 * p) * (i / segments);
+                    path += ` L${x},${y}`;
+                }
+                for (let i = segments; i >= 0; i--) {
+                    const x = p + (w - 2 * p) * (i / segments);
+                    const y = h - p + (rand(200 + i * 2) - 0.5) * wobble;
+                    path += ` L${x},${y}`;
+                }
+                for (let i = segments; i >= 1; i--) {
+                    const x = p + (rand(300 + i * 2) - 0.5) * wobble;
+                    const y = p + (h - 2 * p) * (i / segments);
+                    path += ` L${x},${y}`;
+                }
+                path += ' Z';
+                return path;
+            }
+
+            window.applyPortraitTornPaper = function() {
+                const element = document.getElementById('portrait-modal-content');
+                if (!element) return;
+
+                const existing = element.querySelector('.torn-paper-bg');
+                if (existing) existing.remove();
+
+                const rect = element.getBoundingClientRect();
+                const w = rect.width;
+                const h = rect.height;
+                if (w === 0 || h === 0) return;
+
+                const tornPath = generateTornRect(888, w, h, 3, 8);
+                const shadowPath = generateTornRect(888, w + 6, h + 6, 3, 8);
+
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('class', 'torn-paper-bg');
+                svg.setAttribute('viewBox', `-3 -3 ${w + 6} ${h + 6}`);
+                svg.style.cssText = `position:absolute;top:-3px;left:-3px;width:calc(100% + 6px);height:calc(100% + 6px);pointer-events:none;z-index:0;`;
+
+                svg.innerHTML = `
+                    <path d="${shadowPath}" fill="rgba(0,0,0,0.1)" stroke="none" transform="translate(4, 4)"/>
+                    <path d="${tornPath}" fill="#FFF8F0" stroke="none"/>
+                    <path d="${tornPath}" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+                `;
+
+                element.insertBefore(svg, element.firstChild);
+            };
+        })();
+
+        // Portrait modal functions
+        function openPortraitModal() {
+            const modal = document.getElementById('portrait-modal');
+            const video = document.getElementById('portrait-video');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            video.currentTime = 0;
+            video.play();
+            setTimeout(window.applyPortraitTornPaper, 50);
+        }
+
+        function closePortraitModal() {
+            const modal = document.getElementById('portrait-modal');
+            const video = document.getElementById('portrait-video');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+            video.pause();
+        }
+
+        // Close on background click or Escape
+        document.getElementById('portrait-modal').addEventListener('click', function(e) {
+            if (e.target === this) closePortraitModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('portrait-modal').style.display === 'block') {
+                closePortraitModal();
+            }
+        });
+    </script>
+</body>
+</html>

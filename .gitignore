@@ -1,7 +1,22 @@
+# Claude Code local settings
 **/.claude/settings.local.json
 
-# Archive directories and unused images
-archive-images/
+# Generated PDFs
+business-cards.pdf
 
 # DS_Store
 .DS_Store
+
+# Development/reference folders
+cute/
+old/
+reference/
+venv/
+
+# Image source/backup folders (processed images are in images/)
+images_backup/
+new_images/
+archive-images/
+
+# Unused assets
+profile_alt.jpg

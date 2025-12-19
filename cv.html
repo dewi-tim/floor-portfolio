@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Bakes of the Floor</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="./favicon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8F0;
+            --cream-dark: #F0E4D4;
+            --pink: #FC2847;
+            --pink-light: #FFBCD9;
+            --cyan: #00B7EB;
+            --cyan-light: #9ACEEB;
+            --yellow: #FCD667;
+            --yellow-light: #FCF4A3;
+            --green: #00A86B;
+            --green-light: #76D7C4;
+            --coral: #FF5349;
+            --coral-light: #FFB97B;
+            --blue: #0066FF;
+            --brown: #9C6B30;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background: var(--cream);
+            color: #3D3D3D;
+            line-height: 1.6;
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+
+        /* Paper grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Stars background - behind everything */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            opacity: 0.45;
+            animation: twinkle 5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.35; transform: scale(1); }
+            50% { opacity: 0.55; transform: scale(1.15); }
+        }
+
+        .stripe-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 30px,
+                rgba(27, 156, 133, 0.05) 30px,
+                rgba(27, 156, 133, 0.05) 35px
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Header area - no background, stars visible through */
+        .site-header {
+            position: relative;
+            z-index: 10;
+            padding: 0.5rem 1rem;
+            max-height: 33vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Scroll container - content scrolls here, never overlaps header */
+        .scroll-container {
+            position: relative;
+            z-index: 10;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .page-wrapper {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            padding: 0.5rem 1.5rem 1.5rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 0.3rem 0;
+        }
+
+        .logo-image {
+            max-height: calc(33vh - 60px);
+            width: auto;
+            max-width: 90%;
+            object-fit: contain;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 0.4rem 1rem;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:nth-child(1) { background: var(--pink-light); color: var(--pink); }
+        nav a:nth-child(2) { background: var(--cyan-light); color: var(--cyan); }
+        nav a:nth-child(3) { background: var(--yellow-light); color: var(--brown); }
+
+        nav a:hover {
+            transform: rotate(-3deg) scale(1.08);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        nav a.active {
+            transform: rotate(-3deg) scale(1.1);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        /* Radio button behavior: deselect active when hovering another */
+        nav:has(a:not(.active):hover) a.active {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* CV Content */
+        .cv-container {
+            position: relative;
+            background: white;
+            padding: 2.5rem;
+        }
+
+        .cv-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CV Header */
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px dashed var(--pink-light);
+        }
+
+        .cv-photo {
+            flex-shrink: 0;
+            width: 120px;
+            height: 140px;
+            position: relative;
+            transform: rotate(2deg);
+        }
+
+        .cv-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow:
+                2px 2px 0 var(--pink-light),
+                4px 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .cv-photo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            width: 50px;
+            height: 20px;
+            background: rgba(252, 214, 103, 0.7);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .cv-title-block {
+            flex: 1;
+        }
+
+        .cv-name {
+            font-family: 'Lilita One', sans-serif;
+            font-weight: 400;
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+            color: var(--pink);
+            line-height: 1.1;
+            margin-bottom: 0.8rem;
+        }
+
+        .cv-contact {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .cv-contact a {
+            color: var(--cyan);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .cv-contact a:hover {
+            color: var(--pink);
+            text-decoration: underline;
+        }
+
+        /* Section headings */
+        .section-title {
+            font-family: 'Lilita One', sans-serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: var(--cyan);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 2px solid var(--cyan-light);
+            display: inline-block;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Entries */
+        .entry {
+            margin: 1.2rem 0;
+            padding: 1rem 1rem 1rem 1.5rem;
+            position: relative;
+        }
+
+        .entry::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--pink-light);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .org {
+            font-family: 'Lilita One', sans-serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--pink);
+        }
+
+        .dates {
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--brown);
+            background: var(--yellow-light);
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .role {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .details {
+            margin: 0.5rem 0 0;
+            padding-left: 1.2rem;
+            list-style: none;
+        }
+
+        .details li {
+            margin: 0.4rem 0;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .details li::before {
+            content: "~";
+            position: absolute;
+            left: -1em;
+            color: var(--coral);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .footer-doodles {
+            font-size: 1.3rem;
+            letter-spacing: 0.25rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-tagline {
+            font-family: 'Gaegu', cursive;
+            font-size: 0.95rem;
+            color: var(--brown);
+        }
+
+        /* Portrait modal */
+        .portrait-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .portrait-modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-1deg);
+            max-width: 90%;
+            max-height: 85vh;
+        }
+
+        .portrait-modal-inner {
+            position: relative;
+            z-index: 1;
+            padding: 1.5rem;
+        }
+
+        .portrait-modal video {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 4px;
+            box-shadow: 4px 4px 0 var(--pink-light);
+        }
+
+        .portrait-modal .close-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.8rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10;
+            color: var(--pink);
+            font-family: 'Gaegu', cursive;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+            background: none;
+            border: none;
+        }
+
+        .portrait-modal .close-button:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .cv-photo {
+            cursor: pointer;
+        }
+
+        .cv-photo-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .portrait-hint {
+            font-family: 'Gaegu', cursive;
+            font-size: 0.85rem;
+            color: var(--brown);
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .page-wrapper {
+                padding: 1rem;
+            }
+
+            .cv-container {
+                padding: 1.5rem;
+            }
+
+            .cv-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .cv-photo-wrapper {
+                order: -1;
+                margin-bottom: 1rem;
+            }
+
+            .entry-header {
+                flex-direction: column;
+            }
+
+            .dates {
+                align-self: flex-start;
+            }
+
+            nav a {
+                font-size: 0.95rem;
+                padding: 0.35rem 0.8rem;
+            }
+        }
+
+        /* Print styles - keep visual styling, hide header/nav/footer and hints */
+        @media print {
+            .site-header,
+            footer,
+            .portrait-hint {
+                display: none !important;
+            }
+
+            html, body {
+                height: auto;
+                overflow: visible;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                display: block;
+                /* Apply stripes directly to body for print (fixed positioning doesn't work) */
+                background:
+                    repeating-linear-gradient(
+                        90deg,
+                        transparent,
+                        transparent 30px,
+                        rgba(27, 156, 133, 0.05) 30px,
+                        rgba(27, 156, 133, 0.05) 35px
+                    ),
+                    var(--cream);
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Hide the fixed stripe overlay since we use body background */
+            .stripe-bg {
+                display: none;
+            }
+
+            /* Change stars from fixed to absolute so they appear */
+            .stars-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                min-height: 100%;
+            }
+
+            .scroll-container {
+                overflow: visible;
+                height: auto;
+            }
+
+            /* Center content with margins so background shows around it */
+            .page-wrapper {
+                max-width: 85%;
+                margin: 0 auto;
+                padding: 0;
+            }
+
+            /* Add cloned padding to wrapper - cream background shows through */
+            .content-wrapper {
+                padding: 1.5rem;
+                box-decoration-break: clone;
+                -webkit-box-decoration-break: clone;
+            }
+
+            /* Hide SVG wobbly border and use CSS border with box-decoration-break
+               so border is complete/closed on each page */
+            .cv-container {
+                background: white;
+                border: 5px solid var(--pink-light);
+                border-radius: 12px;
+                box-decoration-break: clone;
+                -webkit-box-decoration-break: clone;
+                padding: 1.5rem;
+            }
+
+            .cv-container > svg.wobbly-border {
+                display: none !important;
+            }
+
+            /* Keep entries together on same page */
+            .entry,
+            .cv-header {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .section-title {
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+        }
+
+        @page {
+            margin: 0;
+            size: A4;
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Filters -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+            <filter id="crayon-text" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Background decorations -->
+    <div class="stars-bg" aria-hidden="true"></div>
+    <div class="stripe-bg" aria-hidden="true"></div>
+
+    <div class="site-header">
+        <div class="page-wrapper">
+            <header>
+                <img src="./logo_with_text.png" alt="Bakes of the Floor" class="logo-image">
+            </header>
+
+            <nav>
+                <a href="contact.html">contact</a>
+                <a href="gallery.html">gallery</a>
+                <a href="cv.html" class="active">cv</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="scroll-container">
+        <div class="page-wrapper">
+            <div class="content-wrapper">
+            <main class="cv-container" id="cv-container">
+            <div class="cv-header">
+                <div class="cv-title-block">
+                    <h2 class="cv-name">Floor ter Meulen</h2>
+                    <div class="cv-contact">
+                        <strong>Email:</strong> <a href="mailto:floortermeulen2004@gmail.com">floortermeulen2004@gmail.com</a><br>
+                        <strong>Instagram:</strong> <a href="https://instagram.com/bakesofthefloor" target="_blank">@bakesofthefloor</a><br>
+                        <strong>Portfolio:</strong> <a href="https://bakesofthefloor.amsterdam" target="_blank">bakesofthefloor.amsterdam</a>
+                    </div>
+                </div>
+                <div class="cv-photo-wrapper">
+                    <div class="cv-photo" onclick="openPortraitModal()">
+                        <img src="./images/floor-square.jpeg" alt="Floor ter Meulen">
+                    </div>
+                    <span class="portrait-hint">&#8593; click me</span>
+                </div>
+            </div>
+
+            <h3 class="section-title">Experience</h3>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">Kometen Brood & Café, Amsterdam</span>
+                    <span class="dates">Jun 2022 – Present</span>
+                </div>
+                <div class="role">Pastry Baker & Front-of-House Shift Lead</div>
+                <ul class="details">
+                    <li>Led daily production of 1,500+ viennoiserie items, with expertise in sourdough croissant and puff pastry lamination</li>
+                    <li>Created weekly seasonal pastry specials, zero-waste recipes; coached 12+ staff on busy shifts</li>
+                    <li>Maintained barista excellence (espresso dialing, latte art, workflow)</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">De Laatste Kruimel, Amsterdam</span>
+                    <span class="dates">Oct 2022 – Feb 2023</span>
+                </div>
+                <div class="role">Barista</div>
+                <ul class="details">
+                    <li>Operated in a high-volume specialty café serving global visitors</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">Stedelijk Museum, Amsterdam</span>
+                    <span class="dates">Oct 2022 – Jun 2023</span>
+                </div>
+                <div class="role">Blikopener (Peer Educator)</div>
+                <ul class="details">
+                    <li>Co-designed inclusive programming & ran youth-led workshops</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">DEGASTEN & Theatergroep Bambie</span>
+                    <span class="dates">2022 – 2023</span>
+                </div>
+                <div class="role">Physical Performer</div>
+                <ul class="details">
+                    <li>Created & toured an ensemble performance exploring care</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">Kaaspaleis Blijdorp, Rotterdam</span>
+                    <span class="dates">Sep 2020 – Aug 2022</span>
+                </div>
+                <div class="role">Cheese Specialist & Deli Assistant</div>
+                <ul class="details">
+                    <li>Advised on Dutch cheeses & curated custom platters</li>
+                </ul>
+            </div>
+
+            <h3 class="section-title">Education</h3>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">De TheaterHavo/VWO, Rotterdam</span>
+                    <span class="dates">2016 – 2022</span>
+                </div>
+                <div class="role">VWO Diploma</div>
+                <ul class="details">
+                    <li>Combined rigorous academics with 8 hrs/week of acting, singing & dance</li>
+                </ul>
+            </div>
+
+            <div class="entry">
+                <div class="entry-header">
+                    <span class="org">KDVI Amsterdam</span>
+                    <span class="dates">2021</span>
+                </div>
+                <div class="role">Wiskunde B (Pre-University Mathematics B)</div>
+            </div>
+        </main>
+
+            <footer>
+                <div class="footer-doodles" aria-hidden="true">
+                    &#127856; &#127874; &#129473; &#127846; &#127871;
+                </div>
+                <p class="footer-tagline">Bakery Floor, coming soon. · site by <a href="https://github.com/dewi-tim" target="_blank">@dewi-tim</a></p>
+            </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portrait Modal -->
+    <div class="portrait-modal" id="portrait-modal">
+        <div class="portrait-modal-content" id="portrait-modal-content">
+            <div class="portrait-modal-inner">
+                <button class="close-button" onclick="closePortraitModal()">&times;</button>
+                <video id="portrait-video" playsinline muted loop>
+                    <source src="./images/floor.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        (function() {
+            const colors = ['#FC2847', '#00B7EB', '#FCD667', '#00A86B', '#FF5349'];
+            const container = document.querySelector('.stars-bg');
+
+            for (let i = 0; i < 25; i++) {
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('viewBox', '0 0 50 50');
+                svg.setAttribute('class', 'star');
+                const size = 20 + Math.random() * 30;
+                svg.style.width = size + 'px';
+                svg.style.height = size + 'px';
+                svg.style.left = Math.random() * 100 + '%';
+                svg.style.top = Math.random() * 100 + '%';
+                svg.style.animationDelay = Math.random() * 4 + 's';
+                svg.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                if (Math.random() > 0.4) {
+                    svg.innerHTML = `<path d="M25,2 L28,20 L48,25 L28,30 L25,48 L22,30 L2,25 L22,20 Z" fill="${color}" opacity="0.7"/>`;
+                } else {
+                    svg.innerHTML = `<path d="M25,0 L27,22 L50,25 L27,28 L25,50 L23,28 L0,25 L23,22 Z" fill="${color}" opacity="0.6"/>`;
+                }
+
+                container.appendChild(svg);
+            }
+
+            for (let i = 0; i < 8; i++) {
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('viewBox', '0 0 40 40');
+                svg.setAttribute('class', 'star');
+                const size = 25 + Math.random() * 20;
+                svg.style.width = size + 'px';
+                svg.style.height = size + 'px';
+                svg.style.left = Math.random() * 100 + '%';
+                svg.style.top = Math.random() * 100 + '%';
+                svg.style.animationDelay = Math.random() * 4 + 's';
+                svg.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                svg.innerHTML = `
+                    <ellipse cx="20" cy="8" rx="6" ry="9" fill="${color}" opacity="0.6"/>
+                    <ellipse cx="20" cy="32" rx="6" ry="9" fill="${color}" opacity="0.6"/>
+                    <ellipse cx="8" cy="20" rx="9" ry="6" fill="${color}" opacity="0.6"/>
+                    <ellipse cx="32" cy="20" rx="9" ry="6" fill="${color}" opacity="0.6"/>
+                    <circle cx="20" cy="20" r="5" fill="${color}" opacity="0.8"/>
+                `;
+                container.appendChild(svg);
+            }
+        })();
+
+        // Wobbly border for CV container
+        (function() {
+            function seededRandom(seed) {
+                const x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+
+            function generateWobblyRect(seed, w, h, padding = 8, wobble = 6) {
+                const rand = (i) => seededRandom(seed + i);
+                const p = padding;
+
+                const tl = { x: p + rand(1) * wobble, y: p + rand(2) * wobble };
+                const tr = { x: w - p - rand(3) * wobble, y: p + rand(4) * wobble };
+                const br = { x: w - p - rand(5) * wobble, y: h - p - rand(6) * wobble };
+                const bl = { x: p + rand(7) * wobble, y: h - p - rand(8) * wobble };
+
+                const cp1 = { x: w * 0.3 + (rand(9) - 0.5) * wobble, y: p + (rand(10) - 0.5) * wobble };
+                const cp2 = { x: w * 0.7 + (rand(11) - 0.5) * wobble, y: p + (rand(12) - 0.5) * wobble };
+                const cp3 = { x: w - p + (rand(13) - 0.5) * wobble, y: h * 0.3 + (rand(14) - 0.5) * wobble };
+                const cp4 = { x: w - p + (rand(15) - 0.5) * wobble, y: h * 0.7 + (rand(16) - 0.5) * wobble };
+                const cp5 = { x: w * 0.7 + (rand(17) - 0.5) * wobble, y: h - p + (rand(18) - 0.5) * wobble };
+                const cp6 = { x: w * 0.3 + (rand(19) - 0.5) * wobble, y: h - p + (rand(20) - 0.5) * wobble };
+                const cp7 = { x: p + (rand(21) - 0.5) * wobble, y: h * 0.7 + (rand(22) - 0.5) * wobble };
+                const cp8 = { x: p + (rand(23) - 0.5) * wobble, y: h * 0.3 + (rand(24) - 0.5) * wobble };
+
+                return `M${tl.x},${tl.y} ` +
+                       `Q${cp1.x},${cp1.y} ${(tl.x + tr.x) / 2},${(tl.y + tr.y) / 2 + (rand(25) - 0.5) * wobble * 0.5} ` +
+                       `Q${cp2.x},${cp2.y} ${tr.x},${tr.y} ` +
+                       `Q${cp3.x},${cp3.y} ${(tr.x + br.x) / 2 + (rand(26) - 0.5) * wobble * 0.5},${(tr.y + br.y) / 2} ` +
+                       `Q${cp4.x},${cp4.y} ${br.x},${br.y} ` +
+                       `Q${cp5.x},${cp5.y} ${(br.x + bl.x) / 2},${(br.y + bl.y) / 2 + (rand(27) - 0.5) * wobble * 0.5} ` +
+                       `Q${cp6.x},${cp6.y} ${bl.x},${bl.y} ` +
+                       `Q${cp7.x},${cp7.y} ${(bl.x + tl.x) / 2 + (rand(28) - 0.5) * wobble * 0.5},${(bl.y + tl.y) / 2} ` +
+                       `Q${cp8.x},${cp8.y} ${tl.x},${tl.y} Z`;
+            }
+
+            function applyWobblyBorder(element, color, seed, strokeWidth = 5) {
+                const existing = element.querySelector('.wobbly-border');
+                if (existing) existing.remove();
+
+                const rect = element.getBoundingClientRect();
+                const w = rect.width;
+                const h = rect.height;
+
+                if (w === 0 || h === 0) return;
+
+                const fillPath = generateWobblyRect(seed, w, h, 6, 5);
+                const strokePath = generateWobblyRect(seed, w, h, 3, 6);
+
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('class', 'wobbly-border');
+                svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+                svg.style.cssText = `position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;`;
+
+                svg.innerHTML = `
+                    <path d="${fillPath}" fill="white" stroke="none"/>
+                    <path d="${strokePath}" fill="none" stroke="${color}" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round"/>
+                `;
+
+                element.insertBefore(svg, element.firstChild);
+            }
+
+            function init() {
+                const cvContainer = document.getElementById('cv-container');
+                if (cvContainer) {
+                    applyWobblyBorder(cvContainer, '#FFBCD9', 999, 5);
+                }
+            }
+
+            setTimeout(init, 100);
+            window.addEventListener('resize', init);
+
+            // Torn paper for portrait modal
+            function generateTornRect(seed, w, h, padding = 5, wobble = 12) {
+                const rand = (i) => seededRandom(seed + i);
+                const p = padding;
+                let path = '';
+                const segments = 20;
+
+                path += `M${p},${p + rand(1) * wobble}`;
+                for (let i = 1; i <= segments; i++) {
+                    const x = p + (w - 2 * p) * (i / segments);
+                    const y = p + (rand(i * 2) - 0.5) * wobble;
+                    path += ` L${x},${y}`;
+                }
+                for (let i = 1; i <= segments; i++) {
+                    const x = w - p + (rand(100 + i * 2) - 0.5) * wobble;
+                    const y = p + (h - 2 * p) * (i / segments);
+                    path += ` L${x},${y}`;
+                }
+                for (let i = segments; i >= 0; i--) {
+                    const x = p + (w - 2 * p) * (i / segments);
+                    const y = h - p + (rand(200 + i * 2) - 0.5) * wobble;
+                    path += ` L${x},${y}`;
+                }
+                for (let i = segments; i >= 1; i--) {
+                    const x = p + (rand(300 + i * 2) - 0.5) * wobble;
+                    const y = p + (h - 2 * p) * (i / segments);
+                    path += ` L${x},${y}`;
+                }
+                path += ' Z';
+                return path;
+            }
+
+            window.applyPortraitTornPaper = function() {
+                const element = document.getElementById('portrait-modal-content');
+                if (!element) return;
+
+                const existing = element.querySelector('.torn-paper-bg');
+                if (existing) existing.remove();
+
+                const rect = element.getBoundingClientRect();
+                const w = rect.width;
+                const h = rect.height;
+                if (w === 0 || h === 0) return;
+
+                const tornPath = generateTornRect(888, w, h, 3, 8);
+                const shadowPath = generateTornRect(888, w + 6, h + 6, 3, 8);
+
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('class', 'torn-paper-bg');
+                svg.setAttribute('viewBox', `-3 -3 ${w + 6} ${h + 6}`);
+                svg.style.cssText = `position:absolute;top:-3px;left:-3px;width:calc(100% + 6px);height:calc(100% + 6px);pointer-events:none;z-index:0;`;
+
+                svg.innerHTML = `
+                    <path d="${shadowPath}" fill="rgba(0,0,0,0.1)" stroke="none" transform="translate(4, 4)"/>
+                    <path d="${tornPath}" fill="#FFF8F0" stroke="none"/>
+                    <path d="${tornPath}" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+                `;
+
+                element.insertBefore(svg, element.firstChild);
+            };
+        })();
+
+        // Portrait modal functions
+        function openPortraitModal() {
+            const modal = document.getElementById('portrait-modal');
+            const video = document.getElementById('portrait-video');
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            video.currentTime = 0;
+            video.play();
+            setTimeout(window.applyPortraitTornPaper, 50);
+        }
+
+        function closePortraitModal() {
+            const modal = document.getElementById('portrait-modal');
+            const video = document.getElementById('portrait-video');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+            video.pause();
+        }
+
+        // Close on background click or Escape
+        document.getElementById('portrait-modal').addEventListener('click', function(e) {
+            if (e.target === this) closePortraitModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('portrait-modal').style.display === 'block') {
+                closePortraitModal();
+            }
+        });
+    </script>
+</body>
+</html>
