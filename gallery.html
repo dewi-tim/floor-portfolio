@@ -799,8 +799,12 @@
                         const aspectRatio = item.aspectRatio || 0.75;
                         modalImage.style.aspectRatio = aspectRatio;
 
+                        // Hide previous image while loading new one
+                        modalImage.style.opacity = '0';
+
                         // Reapply torn paper when image loads (fixes race condition)
                         modalImage.onload = function() {
+                            modalImage.style.opacity = '1';
                             window.applyTornPaper();
                         };
 
