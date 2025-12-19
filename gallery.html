@@ -799,6 +799,11 @@
                         const aspectRatio = item.aspectRatio || 0.75;
                         modalImage.style.aspectRatio = aspectRatio;
 
+                        // Reapply torn paper when image loads (fixes race condition)
+                        modalImage.onload = function() {
+                            window.applyTornPaper();
+                        };
+
                         // Set src after sizing
                         modalImage.src = item.image + '?v=' + new Date().getTime();
                         modalImage.alt = item.title;
