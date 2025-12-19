@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Editor</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: system-ui, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 { margin: 0 0 20px; color: #FCD667; }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #333;
+            color: #fff;
+            border: 2px solid #555;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        button:hover { background: #444; border-color: #777; }
+        button.primary { background: #00A86B; border-color: #00A86B; }
+        button.primary:hover { background: #008f5b; }
+        button.danger { background: #c33; border-color: #c33; }
+        button.danger:hover { background: #a22; }
+
+        .items { display: flex; flex-direction: column; gap: 20px; }
+        .item {
+            background: #252525;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 120px 120px 1fr auto;
+            gap: 20px;
+            align-items: start;
+        }
+        .item.dragging { opacity: 0.5; }
+        .item.drag-over { border-color: #FCD667; }
+
+        .image-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .image-picker label {
+            font-size: 12px;
+            color: #888;
+        }
+        .image-picker img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            background: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid #444;
+        }
+        .image-picker img:hover { border-color: #00B7EB; }
+        .image-picker input[type="text"] {
+            width: 100px;
+            font-size: 11px;
+        }
+
+        .fields {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .field label {
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 3px;
+        }
+        .field input, .field textarea {
+            width: 100%;
+            background: #333;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        .field input:focus, .field textarea:focus {
+            outline: none;
+            border-color: #00B7EB;
+        }
+        .field textarea { min-height: 80px; resize: vertical; }
+
+        .item-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .item-controls button {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        .drag-handle {
+            cursor: grab;
+            padding: 5px 10px;
+            background: #444;
+            text-align: center;
+        }
+        .drag-handle:active { cursor: grabbing; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 100;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .modal.open { display: block; }
+        .modal-content {
+            background: #252525;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #444;
+        }
+        .modal h2 { margin: 0 0 15px; color: #FCD667; }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .image-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid #444;
+            border-radius: 4px;
+            background: #333;
+        }
+        .image-grid img:hover { border-color: #00B7EB; }
+        .image-grid img.selected { border-color: #00A86B; }
+        .modal-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+        }
+
+        .json-output {
+            background: #111;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 700px) {
+            .item {
+                grid-template-columns: 1fr;
+            }
+            .image-picker { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Gallery Editor</h1>
+
+    <div class="controls">
+        <button onclick="addItem()" class="primary">+ Add Item</button>
+        <button onclick="saveFile()" class="primary">Save to File</button>
+        <button onclick="showJson()">Show JSON</button>
+        <button onclick="loadFromFile()">Load from File</button>
+    </div>
+
+    <div class="items" id="items"></div>
+
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <h2>Select Image</h2>
+            <div class="image-grid" id="imageGrid"></div>
+            <div class="modal-controls">
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="jsonModal">
+        <div class="modal-content">
+            <h2>JSON Output</h2>
+            <p style="color:#888;margin:0 0 10px">Copy this and save as data.json:</p>
+            <div class="json-output" id="jsonOutput"></div>
+            <div class="modal-controls">
+                <button onclick="copyJson()" class="primary">Copy to Clipboard</button>
+                <button onclick="closeJsonModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let data = { items: [] };
+        let allImages = [];
+        let currentPicker = null;
+        let draggedItem = null;
+
+        async function init() {
+            try {
+                const res = await fetch('data.json');
+                data = await res.json();
+            } catch (e) {
+                console.log('Could not load data.json, starting fresh');
+                data = { items: [] };
+            }
+            await scanImages();
+            render();
+        }
+
+        async function scanImages() {
+            // Scan images directory
+            const dirs = ['images'];
+            allImages = [];
+
+            for (const dir of dirs) {
+                try {
+                    const res = await fetch(dir + '/');
+                    const text = await res.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const links = doc.querySelectorAll('a');
+                    links.forEach(a => {
+                        const href = a.getAttribute('href');
+                        if (href && /\.(jpg|jpeg|png|gif|webp)$/i.test(href)) {
+                            allImages.push(dir + '/' + href);
+                        }
+                    });
+                } catch (e) {
+                    console.log('Could not scan', dir);
+                }
+            }
+        }
+
+        function render() {
+            const container = document.getElementById('items');
+            container.innerHTML = data.items.map((item, i) => `
+                <div class="item" draggable="true" data-index="${i}">
+                    <div class="image-picker">
+                        <label>Thumbnail</label>
+                        <img src="${item.thumbnail}" onclick="openImagePicker(${i}, 'thumbnail')"
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 fill=%22%23666%22>No image</text></svg>'">
+                        <input type="text" value="${item.thumbnail}" onchange="updateField(${i}, 'thumbnail', this.value)" placeholder="path/to/thumb.png">
+                    </div>
+                    <div class="image-picker">
+                        <label>Full Image</label>
+                        <img src="${item.image}" onclick="openImagePicker(${i}, 'image')"
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2250%22 text-anchor=%22middle%22 fill=%22%23666%22>No image</text></svg>'">
+                        <input type="text" value="${item.image}" onchange="updateField(${i}, 'image', this.value)" placeholder="path/to/image.jpg">
+                    </div>
+                    <div class="fields">
+                        <div class="field">
+                            <label>Title</label>
+                            <input type="text" value="${escapeHtml(item.title)}" onchange="updateField(${i}, 'title', this.value)">
+                        </div>
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea onchange="updateField(${i}, 'fullDescription', this.value)">${escapeHtml(item.fullDescription)}</textarea>
+                        </div>
+                        <div class="field">
+                            <label>Aspect Ratio (width/height)</label>
+                            <input type="number" step="0.01" value="${item.aspectRatio}" onchange="updateField(${i}, 'aspectRatio', parseFloat(this.value))">
+                        </div>
+                    </div>
+                    <div class="item-controls">
+                        <div class="drag-handle">drag</div>
+                        <button onclick="moveItem(${i}, -1)">Move Up</button>
+                        <button onclick="moveItem(${i}, 1)">Move Down</button>
+                        <button onclick="deleteItem(${i})" class="danger">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add drag events
+            container.querySelectorAll('.item').forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        function escapeHtml(str) {
+            return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function updateField(index, field, value) {
+            data.items[index][field] = value;
+        }
+
+        function addItem() {
+            const newId = Math.max(0, ...data.items.map(i => i.id)) + 1;
+            data.items.push({
+                id: newId,
+                title: 'New Item',
+                shortDescription: '',
+                fullDescription: '',
+                thumbnail: '',
+                image: '',
+                aspectRatio: 1
+            });
+            render();
+        }
+
+        function deleteItem(index) {
+            if (confirm('Delete this item?')) {
+                data.items.splice(index, 1);
+                render();
+            }
+        }
+
+        function moveItem(index, direction) {
+            const newIndex = index + direction;
+            if (newIndex < 0 || newIndex >= data.items.length) return;
+            const item = data.items.splice(index, 1)[0];
+            data.items.splice(newIndex, 0, item);
+            render();
+        }
+
+        // Drag and drop
+        function handleDragStart(e) {
+            draggedItem = this;
+            this.classList.add('dragging');
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.item').forEach(i => i.classList.remove('drag-over'));
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (draggedItem === this) return;
+
+            const fromIndex = parseInt(draggedItem.dataset.index);
+            const toIndex = parseInt(this.dataset.index);
+
+            const item = data.items.splice(fromIndex, 1)[0];
+            data.items.splice(toIndex, 0, item);
+            render();
+        }
+
+        // Image picker modal
+        function openImagePicker(itemIndex, field) {
+            currentPicker = { itemIndex, field };
+            const grid = document.getElementById('imageGrid');
+            grid.innerHTML = allImages.map(img => `
+                <img src="${img}" onclick="selectImage('${img}')"
+                     class="${data.items[itemIndex][field] === img ? 'selected' : ''}"
+                     onerror="this.style.display='none'">
+            `).join('');
+            document.getElementById('imageModal').classList.add('open');
+        }
+
+        function selectImage(path) {
+            if (currentPicker) {
+                data.items[currentPicker.itemIndex][currentPicker.field] = path;
+
+                // Auto-calculate aspect ratio for full images
+                if (currentPicker.field === 'image') {
+                    const img = new Image();
+                    img.onload = () => {
+                        data.items[currentPicker.itemIndex].aspectRatio =
+                            Math.round((img.width / img.height) * 100) / 100;
+                        render();
+                    };
+                    img.src = path;
+                }
+
+                render();
+            }
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('open');
+            currentPicker = null;
+        }
+
+        // JSON output
+        function showJson() {
+            // Renumber IDs
+            data.items.forEach((item, i) => item.id = i + 1);
+            document.getElementById('jsonOutput').textContent = JSON.stringify(data, null, 2);
+            document.getElementById('jsonModal').classList.add('open');
+        }
+
+        function closeJsonModal() {
+            document.getElementById('jsonModal').classList.remove('open');
+        }
+
+        function copyJson() {
+            navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+            alert('Copied to clipboard!');
+        }
+
+        // File System Access API
+        async function saveFile() {
+            // Renumber IDs
+            data.items.forEach((item, i) => item.id = i + 1);
+
+            try {
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'data.json',
+                    types: [{
+                        description: 'JSON Files',
+                        accept: { 'application/json': ['.json'] }
+                    }]
+                });
+                const writable = await handle.createWritable();
+                await writable.write(JSON.stringify(data, null, 2));
+                await writable.close();
+                alert('Saved!');
+            } catch (e) {
+                if (e.name !== 'AbortError') {
+                    // Fallback to showing JSON
+                    showJson();
+                }
+            }
+        }
+
+        async function loadFromFile() {
+            try {
+                const [handle] = await window.showOpenFilePicker({
+                    types: [{
+                        description: 'JSON Files',
+                        accept: { 'application/json': ['.json'] }
+                    }]
+                });
+                const file = await handle.getFile();
+                const text = await file.text();
+                data = JSON.parse(text);
+                render();
+            } catch (e) {
+                if (e.name !== 'AbortError') {
+                    alert('Could not load file: ' + e.message);
+                }
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

@@ -301,9 +301,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-1deg);
-            width: 90%;
-            max-width: 500px;
-            max-height: 85vh;
+            width: auto;
+            max-width: min(90vw, 700px);
+            max-height: 90vh;
             overflow: hidden;
             text-align: center;
             display: flex;
@@ -351,14 +351,37 @@
 
         #modal-image {
             max-width: 100%;
-            height: 30vh;
-            object-fit: cover;
+            max-height: 55vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             margin: 0 auto 0.8rem;
             display: block;
             border-radius: 4px;
             box-shadow: 4px 4px 0 var(--pink-light);
             transform: rotate(1deg);
             background: var(--cream-dark);
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 95vw;
+                max-width: none;
+                max-height: none;
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            .modal-inner {
+                padding: 1rem 1rem 1.5rem;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            #modal-image {
+                width: 100%;
+                max-height: 60vh;
+                height: auto;
+            }
         }
 
         #modal-description {
@@ -772,11 +795,9 @@
 
                         const modalImage = document.getElementById('modal-image');
 
-                        // Pre-size the image using aspect ratio before loading
+                        // Set aspect ratio for layout stability while loading
                         const aspectRatio = item.aspectRatio || 0.75;
                         modalImage.style.aspectRatio = aspectRatio;
-                        modalImage.style.width = 'auto';
-                        modalImage.style.height = '30vh';
 
                         // Set src after sizing
                         modalImage.src = item.image + '?v=' + new Date().getTime();
