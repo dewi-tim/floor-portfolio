@@ -425,6 +425,24 @@
             cursor: pointer;
         }
 
+        .cv-photo-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .portrait-hint {
+            font-family: 'Gaegu', cursive;
+            font-size: 0.85rem;
+            color: var(--brown);
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
             .page-wrapper {
@@ -441,7 +459,7 @@
                 text-align: center;
             }
 
-            .cv-photo {
+            .cv-photo-wrapper {
                 order: -1;
                 margin-bottom: 1rem;
             }
@@ -460,25 +478,101 @@
             }
         }
 
-        /* Print styles */
+        /* Print styles - keep visual styling, hide header/nav/footer and hints */
         @media print {
-            body::after,
-            .stars-bg,
-            .stripe-bg,
-            nav,
-            footer {
+            .site-header,
+            footer,
+            .portrait-hint {
                 display: none !important;
             }
 
-            .page-wrapper {
-                max-width: 100%;
+            html, body {
+                height: auto;
+                overflow: visible;
+                margin: 0;
                 padding: 0;
             }
 
-            .cv-container {
-                box-shadow: none;
+            body {
+                display: block;
+                /* Apply stripes directly to body for print (fixed positioning doesn't work) */
+                background:
+                    repeating-linear-gradient(
+                        90deg,
+                        transparent,
+                        transparent 30px,
+                        rgba(27, 156, 133, 0.05) 30px,
+                        rgba(27, 156, 133, 0.05) 35px
+                    ),
+                    var(--cream);
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* Hide the fixed stripe overlay since we use body background */
+            .stripe-bg {
+                display: none;
+            }
+
+            /* Change stars from fixed to absolute so they appear */
+            .stars-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                min-height: 100%;
+            }
+
+            .scroll-container {
+                overflow: visible;
+                height: auto;
+            }
+
+            /* Center content with margins so background shows around it */
+            .page-wrapper {
+                max-width: 85%;
+                margin: 0 auto;
                 padding: 0;
             }
+
+            /* Add cloned padding to wrapper - cream background shows through */
+            .content-wrapper {
+                padding: 1.5rem;
+                box-decoration-break: clone;
+                -webkit-box-decoration-break: clone;
+            }
+
+            /* Hide SVG wobbly border and use CSS border with box-decoration-break
+               so border is complete/closed on each page */
+            .cv-container {
+                background: white;
+                border: 5px solid var(--pink-light);
+                border-radius: 12px;
+                box-decoration-break: clone;
+                -webkit-box-decoration-break: clone;
+                padding: 1.5rem;
+            }
+
+            .cv-container > svg.wobbly-border {
+                display: none !important;
+            }
+
+            /* Keep entries together on same page */
+            .entry,
+            .cv-header {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .section-title {
+                break-after: avoid;
+                page-break-after: avoid;
+            }
+        }
+
+        @page {
+            margin: 0;
+            size: A4;
         }
     </style>
 </head>
@@ -524,8 +618,11 @@
                         <strong>Portfolio:</strong> <a href="https://bakesofthefloor.amsterdam" target="_blank">bakesofthefloor.amsterdam</a>
                     </div>
                 </div>
-                <div class="cv-photo" onclick="openPortraitModal()">
-                    <img src="./images/floor-square.jpeg" alt="Floor ter Meulen">
+                <div class="cv-photo-wrapper">
+                    <div class="cv-photo" onclick="openPortraitModal()">
+                        <img src="./images/floor-square.jpeg" alt="Floor ter Meulen">
+                    </div>
+                    <span class="portrait-hint">&#8593; click me</span>
                 </div>
             </div>
 

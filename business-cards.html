@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Cards - Bakes of the Floor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Gaegu:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8F0;
+            --pink: #FC2847;
+            --pink-light: #FFBCD9;
+            --cyan: #00B7EB;
+            --cyan-light: #9ACEEB;
+            --yellow: #FCD667;
+            --yellow-light: #FCF4A3;
+            --green: #00A86B;
+            --green-light: #76D7C4;
+            --coral: #FF5349;
+            --brown: #9C6B30;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background: #e0e0e0;
+            padding: 20px;
+        }
+
+        .print-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: sans-serif;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media print {
+            .print-info { display: none; }
+            body { background: white; padding: 0; }
+            .page { page-break-after: always; }
+            .page:last-child { page-break-after: avoid; }
+        }
+
+        .page {
+            max-width: 210mm;
+            margin: 0 auto 20px;
+            background: white;
+            padding: 10mm;
+        }
+
+        .page-label {
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5mm;
+        }
+
+        @media print { .page-label { display: none; } }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 85mm);
+            grid-auto-rows: 55mm;
+            gap: 5mm;
+            justify-content: center;
+        }
+
+        /* ===== CARD BASE ===== */
+        .card {
+            width: 85mm;
+            height: 55mm;
+            position: relative;
+            overflow: hidden;
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+            background: var(--cream);
+        }
+
+        /* Stripes overlay */
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 6mm,
+                rgba(27, 156, 133, 0.04) 6mm,
+                rgba(27, 156, 133, 0.04) 7mm
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Stars container */
+        .stars-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            opacity: 0.5;
+        }
+
+        /* White content box */
+        .card-content {
+            position: absolute;
+            top: 3mm;
+            left: 3mm;
+            right: 3mm;
+            bottom: 3mm;
+            background: white;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            padding: 3mm;
+        }
+
+        /* ===== FRONT SIDE (Contact) - [details 2] [portrait 1] ===== */
+        .card-front .card-content {
+            gap: 4mm;
+            justify-content: space-between;
+        }
+
+        .card-front .info {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.8mm;
+        }
+
+        .card-front .name {
+            font-family: 'Lilita One', sans-serif;
+            font-size: 14pt;
+            color: var(--pink);
+            line-height: 1.1;
+        }
+
+        .card-front .contact-line {
+            font-size: 7.5pt;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .card-front .contact-label {
+            font-weight: bold;
+        }
+
+        .card-front .contact-value {
+            color: var(--cyan);
+        }
+
+        .card-front .portrait-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-front .portrait {
+            width: 22mm;
+            height: 27mm;
+            position: relative;
+            transform: rotate(2deg);
+        }
+
+        .card-front .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid white;
+            box-shadow: 1px 1px 0 var(--pink-light), 2px 2px 5px rgba(0,0,0,0.15);
+        }
+
+        .card-front .portrait::before {
+            content: '';
+            position: absolute;
+            top: -2.5mm;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 10mm;
+            height: 3.5mm;
+            background: rgba(252, 214, 103, 0.75);
+            z-index: 2;
+        }
+
+        /* ===== BACK SIDE (QR) - no white box, [logo 1] [QR 1] ===== */
+        .card-back .card-content {
+            background: transparent;
+            justify-content: space-around;
+            gap: 4mm;
+        }
+
+        .card-back .logo-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-back .logo {
+            height: 38mm;
+            width: auto;
+            max-width: 38mm;
+            object-fit: contain;
+        }
+
+        .card-back .qr-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5mm;
+        }
+
+        .card-back .qr-code {
+            width: 28mm;
+            height: 28mm;
+        }
+
+        .card-back .qr-code canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-back .qr-text {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 9pt;
+            color: #C41E3A;
+            text-align: center;
+            width: 28mm;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-info">
+        <p><strong>Double-sided Business Cards</strong> - 85mm x 55mm - Print at 100% on A4</p>
+        <p>Page 1: Front (contact) | Page 2: Back (logo + QR) - Flip on long edge</p>
+    </div>
+
+    <!-- PAGE 1: FRONT SIDES (Contact info like CV header) -->
+    <div class="page">
+        <div class="page-label">FRONT SIDES</div>
+        <div class="cards-grid" id="fronts-grid">
+        </div>
+    </div>
+
+    <!-- PAGE 2: BACK SIDES (Logo + QR) -->
+    <div class="page">
+        <div class="page-label">BACK SIDES</div>
+        <div class="cards-grid" id="backs-grid">
+        </div>
+    </div>
+
+    <script>
+        const NUM_CARDS = 8;
+        const starColors = ['#FC2847', '#00B7EB', '#FCD667', '#00A86B', '#FF5349'];
+
+        // Seeded random for consistent wobbly borders
+        function seededRandom(seed) {
+            const x = Math.sin(seed) * 10000;
+            return x - Math.floor(x);
+        }
+
+        // Generate stars for a container
+        function generateStars(container, seed) {
+            for (let i = 0; i < 12; i++) {
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('viewBox', '0 0 50 50');
+                svg.setAttribute('class', 'star');
+                const rand = () => seededRandom(seed + i * 7 + Math.random() * 0.001);
+                const size = 6 + rand() * 10;
+                svg.style.width = size + 'px';
+                svg.style.height = size + 'px';
+                svg.style.left = (rand() * 100) + '%';
+                svg.style.top = (seededRandom(seed + i * 13) * 100) + '%';
+                svg.style.transform = `rotate(${rand() * 40 - 20}deg)`;
+
+                const color = starColors[Math.floor(rand() * starColors.length)];
+                svg.innerHTML = `<path d="M25,2 L28,20 L48,25 L28,30 L25,48 L22,30 L2,25 L22,20 Z" fill="${color}" opacity="0.6"/>`;
+                container.appendChild(svg);
+            }
+        }
+
+        // Generate wobbly border path
+        function generateWobblyRect(seed, w, h, padding = 3, wobble = 2.5) {
+            const rand = (i) => seededRandom(seed + i);
+            const p = padding;
+
+            const tl = { x: p + rand(1) * wobble, y: p + rand(2) * wobble };
+            const tr = { x: w - p - rand(3) * wobble, y: p + rand(4) * wobble };
+            const br = { x: w - p - rand(5) * wobble, y: h - p - rand(6) * wobble };
+            const bl = { x: p + rand(7) * wobble, y: h - p - rand(8) * wobble };
+
+            const cp1 = { x: w * 0.3 + (rand(9) - 0.5) * wobble, y: p + (rand(10) - 0.5) * wobble };
+            const cp2 = { x: w * 0.7 + (rand(11) - 0.5) * wobble, y: p + (rand(12) - 0.5) * wobble };
+            const cp3 = { x: w - p + (rand(13) - 0.5) * wobble, y: h * 0.3 + (rand(14) - 0.5) * wobble };
+            const cp4 = { x: w - p + (rand(15) - 0.5) * wobble, y: h * 0.7 + (rand(16) - 0.5) * wobble };
+            const cp5 = { x: w * 0.7 + (rand(17) - 0.5) * wobble, y: h - p + (rand(18) - 0.5) * wobble };
+            const cp6 = { x: w * 0.3 + (rand(19) - 0.5) * wobble, y: h - p + (rand(20) - 0.5) * wobble };
+            const cp7 = { x: p + (rand(21) - 0.5) * wobble, y: h * 0.7 + (rand(22) - 0.5) * wobble };
+            const cp8 = { x: p + (rand(23) - 0.5) * wobble, y: h * 0.3 + (rand(24) - 0.5) * wobble };
+
+            return `M${tl.x},${tl.y} ` +
+                   `Q${cp1.x},${cp1.y} ${(tl.x + tr.x) / 2},${(tl.y + tr.y) / 2 + (rand(25) - 0.5) * wobble * 0.5} ` +
+                   `Q${cp2.x},${cp2.y} ${tr.x},${tr.y} ` +
+                   `Q${cp3.x},${cp3.y} ${(tr.x + br.x) / 2 + (rand(26) - 0.5) * wobble * 0.5},${(tr.y + br.y) / 2} ` +
+                   `Q${cp4.x},${cp4.y} ${br.x},${br.y} ` +
+                   `Q${cp5.x},${cp5.y} ${(br.x + bl.x) / 2},${(br.y + bl.y) / 2 + (rand(27) - 0.5) * wobble * 0.5} ` +
+                   `Q${cp6.x},${cp6.y} ${bl.x},${bl.y} ` +
+                   `Q${cp7.x},${cp7.y} ${(bl.x + tl.x) / 2 + (rand(28) - 0.5) * wobble * 0.5},${(bl.y + tl.y) / 2} ` +
+                   `Q${cp8.x},${cp8.y} ${tl.x},${tl.y} Z`;
+        }
+
+        // Apply wobbly border to content box
+        function applyWobblyBorder(element, seed) {
+            const rect = element.getBoundingClientRect();
+            const w = rect.width;
+            const h = rect.height;
+            if (w === 0 || h === 0) return;
+
+            const path = generateWobblyRect(seed, w, h, 2, 3);
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('class', 'wobbly-border');
+            svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+            svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:3;';
+            svg.innerHTML = `<path d="${path}" fill="none" stroke="#FFBCD9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+            element.appendChild(svg);
+        }
+
+        // Create front card HTML - [details 2:1 portrait]
+        function createFrontCard(index) {
+            return `
+                <div class="card card-front" id="front-${index}">
+                    <div class="stars-bg"></div>
+                    <div class="card-content">
+                        <div class="info">
+                            <div class="name">Floor ter Meulen</div>
+                            <div class="contact-line"><span class="contact-label">Email:</span> <span class="contact-value">floortermeulen2004@gmail.com</span></div>
+                            <div class="contact-line"><span class="contact-label">Instagram:</span> <span class="contact-value">@bakesofthefloor</span></div>
+                            <div class="contact-line"><span class="contact-label">Website:</span> <span class="contact-value">bakesofthefloor.amsterdam</span></div>
+                        </div>
+                        <div class="portrait-wrapper">
+                            <div class="portrait">
+                                <img src="./images/floor-square.jpeg" alt="Floor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create back card HTML - [logo 1:1 QR] no white box
+        function createBackCard(index) {
+            return `
+                <div class="card card-back" id="back-${index}">
+                    <div class="stars-bg"></div>
+                    <div class="card-content">
+                        <div class="logo-wrapper">
+                            <img src="./logo_with_text.png" alt="Bakes of the Floor" class="logo">
+                        </div>
+                        <div class="qr-wrapper">
+                            <div class="qr-code"></div>
+                            <div class="qr-text">visit my website!</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate stylized QR code
+        function generateStylizedQR(container) {
+            const url = 'https://bakesofthefloor.amsterdam';
+            const size = 120;
+
+            // Create QR using simple pattern (we'll use a library approach)
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Use qrcode-generator library
+            const qr = qrcode(0, 'M');
+            qr.addData(url);
+            qr.make();
+
+            const moduleCount = qr.getModuleCount();
+            const cellSize = size / moduleCount;
+            const dotRadius = cellSize * 0.38;
+
+            ctx.clearRect(0, 0, size, size);
+
+            // Draw modules as rounded shapes
+            for (let row = 0; row < moduleCount; row++) {
+                for (let col = 0; col < moduleCount; col++) {
+                    if (qr.isDark(row, col)) {
+                        const x = col * cellSize + cellSize / 2;
+                        const y = row * cellSize + cellSize / 2;
+
+                        // Check if this is a position pattern (corners)
+                        const isPositionPattern =
+                            (row < 7 && col < 7) ||
+                            (row < 7 && col >= moduleCount - 7) ||
+                            (row >= moduleCount - 7 && col < 7);
+
+                        if (isPositionPattern) {
+                            // Position patterns in pink
+                            ctx.fillStyle = '#FC2847';
+                            ctx.beginPath();
+                            ctx.roundRect(col * cellSize + 0.5, row * cellSize + 0.5, cellSize - 1, cellSize - 1, 2);
+                            ctx.fill();
+                        } else {
+                            // Data modules as circles in pink
+                            ctx.fillStyle = '#FC2847';
+                            ctx.beginPath();
+                            ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                }
+            }
+
+            container.appendChild(canvas);
+        }
+
+        // Initialize cards
+        function init() {
+            const frontsGrid = document.getElementById('fronts-grid');
+            const backsGrid = document.getElementById('backs-grid');
+
+            // Generate cards
+            for (let i = 0; i < NUM_CARDS; i++) {
+                frontsGrid.innerHTML += createFrontCard(i);
+                backsGrid.innerHTML += createBackCard(i);
+            }
+
+            // Add stars to all cards
+            document.querySelectorAll('.stars-bg').forEach((container, index) => {
+                generateStars(container, index * 50 + 42);
+            });
+
+            // Apply wobbly borders only to front cards (backs have no white box)
+            setTimeout(() => {
+                document.querySelectorAll('.card-front .card-content').forEach((content, index) => {
+                    applyWobblyBorder(content, index * 100 + 77);
+                });
+
+                // Generate QR codes
+                document.querySelectorAll('.card-back .qr-code').forEach(container => {
+                    generateStylizedQR(container);
+                });
+            }, 100);
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script>
+        // Run init after page and QR library fully loaded
+        window.addEventListener('load', function() {
+            init();
+        });
+    </script>
+</body>
+</html>
